@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Introduction to the Toolbox</title>
+  <link rel="stylesheet" href="styles.css" />
+<style>
+    :root {
+      --bg-main: #d9f5e6;
+      --header-bg: #2f5d50;
+      --nav-bg: #3d6d5d;
+      --tab-bg: #ffffff;
+      --tab-hover: #e0f0e9;
+      --tab-text: #2f5d50;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-main);
+    }
+
+    header {
+      background-color: var(--header-bg);
+      padding: 1rem 0;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      color: white;
+      font-size: 2rem;
+    }
+
+    nav {
+      background-color: var(--nav-bg);
+      display: flex;
+      justify-content: center;
+      padding: 0.5rem;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .dropdown {
+      position: relative;
+      margin: 0 0.5rem;
+    }
+
+    .tab {
+      background-color: var(--tab-bg);
+      color: var(--tab-text);
+      padding: 10px 18px;
+      border-radius: 10px 10px 0 0;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .tab:hover {
+      background-color: var(--tab-hover);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      min-width: 200px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 0 0 10px 10px;
+      z-index: 1001;
+    }
+
+    .dropdown-content a {
+      color: var(--tab-text);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: var(--tab-hover);
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body> <!-- Paste the same header and nav here from index.html -->
+ <header>
+    <h1>Varsha's Toolbox</h1>
+  </header>
+
+  <nav>
+    <div class="dropdown">
+      <a class="tab" href="#">Ethics-by-design Toolbox</a>
+      <div class="dropdown-content">
+        <a href="introduction.html">Introduction to the toolbox</a>
+        <a href="sop.html">SOP for ethics-science integration</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <a class="tab" href="#">Ethics framework</a>
+      <div class="dropdown-content">
+        <a href="ethics-video.html">Small video on introduction to ethics</a>
+        <a href="principles.html">Ethical principles</a>
+        <a href="stakeholders.html">Relationship with stakeholders</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <a class="tab" href="#">Real life examples</a>
+      <div class="dropdown-content">
+        <a href="case-studies.html">Case studies</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <a class="tab" href="#">Toolbox</a>
+      <div class="dropdown-content">
+        <a href="questionnaire.html">Self-analysis Questionnaire</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <a class="tab" href="#">Green Lab</a>
+      <div class="dropdown-content">
+        <a href="lab-sustainability.html">Lab sustainability practices</a>
+        <a href="suggestions.html">Suggestions (open to users)</a>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <h2>Ethics-by-design toolbox</h2>
+    <h3>For the iBOF POSSIBL consortium</h3>
+    <h4>Introduction to the toolbox</h4>
+    <p>An ethics-by-design toolbox in synthetic biology (SynBio) is essential due to the complex
+ethical, social, and environmental challenges inherent to the field. Traditional ethical
+assessments often occur too late in the research process, whereas an ethics-by-design
+approach embeds ethical reflection from the outset, enabling scientists to anticipate and
+navigate value-laden decisions as they arise. Given that SynBio involves the re-engineering
+of living systems, it raises profound questions about human intervention in nature,
+biosafety, biodiversity, and justice, which require more than regulatory oversight alone.
+Moreover, the toolbox can aid in addressing the persistent gap between scientific and
+ethical disciplines by offering practical frameworks that foster collaboration and mutual
+understanding. It is particularly valuable in supporting early-career researchers, who often
+lack formal training in ethics, by providing accessible tools for ethical engagement. Its
+flexibility allows adaptation to varied research contexts, accommodating differences in
+institutional cultures, geographic locations, and individual moral commitments. Importantly,
+such a toolbox also fills the gaps in existing governance structures by offering process-based
+tools, such as stakeholder mapping and scenario planning, that promote reflective and
+responsible innovation. As SynBio continues to evolve rapidly, an ethics-by-design toolbox
+ensures that ethical considerations keep pace, promoting research that is not only
+scientifically sound but also socially responsive, environmentally just, and ethically
+grounded.</p>
+<p>The toolbox is intended to contribute to ongoing ethical debates in SynBio by foregrounding
+often-overlooked issues, particularly those related to environmental sustainability and
+livelihood justice. This toolbox also provides access to an in-house developed Standard
+Operating Procedure (SOP) that serves as a reference guide to support productive
+collaborations between ethicists and researchers. This handbook is designed to be
+descriptive and informative, functioning as a practical resource to facilitate meaningful
+integration of ethical reflection into scientific research. It is especially valuable for early-
+career researchers engaged in projects at the intersection of science and ethics.</p>
+<p>The toolbox is thus conceived as a collection of practical tools and resources that enable
+ethical research practices. Specifically, it provides a structured, step-by-step guide that can
+support users with the identification and navigation of potential ethical challenges inherent
+to their work. By offering anticipatory guidance, the toolbox helps mitigate ethical concerns
+that might otherwise be overlooked in the early stages of research. Given the rapid pace of
+scientific advancement and the absence of widely adopted normative frameworks in
+emerging fields like SynBio, such a resource is especially urgent. Additionally, the toolbox
+outlines strategies for fostering sustainable laboratory practices, further extending its
+relevance to both ethical and environmental dimensions of scientific work.</p>
+  </main>
+</body>
+</html>
