@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Introduction to the Toolbox</title>
+  <link rel="stylesheet" href="styles.css" />
+<style>
+    :root {
+      --bg-main: #d9f5e6;
+      --header-bg: #2f5d50;
+      --nav-bg: #3d6d5d;
+      --tab-bg: #ffffff;
+      --tab-hover: #e0f0e9;
+      --tab-text: #2f5d50;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-main);
+    }
+
+    header {
+      background-color: var(--header-bg);
+      padding: 1rem 0;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      color: white;
+      font-size: 2rem;
+    }
+
+    nav {
+      background-color: var(--nav-bg);
+      display: flex;
+      justify-content: center;
+      padding: 0.5rem;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .dropdown {
+      position: relative;
+      margin: 0 0.5rem;
+    }
+
+    .tab {
+      background-color: var(--tab-bg);
+      color: var(--tab-text);
+      padding: 10px 18px;
+      border-radius: 10px 10px 0 0;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .tab:hover {
+      background-color: var(--tab-hover);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      min-width: 200px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 0 0 10px 10px;
+      z-index: 1001;
+    }
+
+    .dropdown-content a {
+      color: var(--tab-text);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: var(--tab-hover);
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body> <!-- Paste the same header and nav here from index.html -->
+ 
+<div id="nav-placeholder"></div>
+
+<script>
+  fetch('nav.html')
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('nav-placeholder').innerHTML = data;
+    });
+</script>
+  <main>
+    <h2>Lab Sustainability Practices</h2>
+    <p>In the POSSIBL consortium, with the feedback during interviews and focus groups, we obtained some suggestions on practices for a sustainable laboratory. Some of them are provided below:</p> 
+<p>Set time aside to plan sustainable practices throughout the project in the beginning (e.g., where all glassware can be used instead of plastic or single-use wares). Planning this in the beginning before officially starting a project gives you more time to think about possible solutions, and it can be a lot easier to follow the plan later rather than spending time at regular intervals. This might not be done later because it would be time-consuming.</p>
+<p><b>Energy efficiency</b></p>
+<p>Implementing energy-conscious practices in the lab can significantly reduce environmental impact. Consider the following strategies:</p>
+<ul>
+  <li>Power down equipment when not in use to minimize idle energy consumption.</li>
+  <li>Regularly defrost freezers to maintain efficiency and reduce energy load.</li>
+  <li>Prioritize energy-efficient models during the procurement stage.</li>
+  <li>Ensure proper airflow by avoiding blockage of air vents in biosafety cabinets.</li>
+  <li>Switch to LED lighting, and consider motion sensor switches (e.g., KU Leuven’s ‘Omlamping’ initiative).</li>
+  <li>Perform routine maintenance on equipment to ensure optimal performance and longevity.</li>
+  <li>Pool PCR runs (e.g., three times a day) to reduce unnecessary machine usage and energy demand.</li>
+</ul>
+<p><b>Water conservation </b></p>
+<p>Adopting mindful water-use practices in the lab helps conserve resources and reduce waste. Consider implementing the following:</p>
+<ul>
+    <li>Assess water needs carefully: Only use deionised water when necessary (1 L of deionised water requires approximately 3 L of tap water to produce).</li>
+    <li>Install foot-pedals on lab sinks to make it easier to turn water on and off quickly and hygienically.</li>
+    <li>Fit low-flow aerators on faucets to reduce water usage without compromising functionality.</li>
+    <li>Maintain reverse osmosis systems regularly to ensure efficiency and minimize water waste.</li>
+    <li>Monitor for leaks and repair them promptly to prevent water loss.</li>
+</ul>
+<p><b>Chemical waste </b></p>
+<p>Reducing chemical waste requires proactive planning, safer substitutions, and responsible disposal practices. Key strategies include:</p>
+<ul>
+    <li>Practice proactive inventory management: Avoid overordering by limiting deliveries and tracking chemical usage to prevent the accumulation of expired or unused substances.</li>
+    <li>Substitute hazardous chemicals with less or non-hazardous alternatives wherever possible, and centralize their use and disposal to streamline safety and efficiency.</li>
+    <li>Ensure waste disposal is organized and safety-driven, following proper labeling, segregation, and disposal protocols to protect both people and the environment.</li>
+</ul>
+
+<p><b>Waste management</b></p>
+<p>Effective waste management in the lab involves reducing, reusing, and responsibly disposing of materials. Consider the following strategies:</p>
+<ul>
+    <li>Properly segregate waste to ensure safe handling and disposal according to type and risk level.</li>
+    <li>Replace single-use items with reusable alternatives where feasible, without compromising safety or accuracy.</li>
+    <li>Partner with suppliers to recycle non-biohazardous plastic items such as centrifuge tubes and pipette tips.</li>
+    <li>Participate in take-back programs for used plastics and other consumables.</li>
+    <li>Opt for recycled or biodegradable plastics where available, considering cost and compatibility.</li>
+    <li>Adapt lab protocols to enable the safe reuse of plastic consumables when appropriate.</li>
+    <li>Automate mindfully, ensuring that automation does not lead to excessive waste generation.</li>
+</ul>
+
+<p><b>Sustainable Procurement and Logistics</b></p>
+<p>Adopting sustainable purchasing and delivery practices can significantly reduce packaging waste and resource use. Consider the following approaches:</p>
+<ul>
+    <li>Purchase supplies in bulk to minimize packaging waste, provided sufficient storage space is available.</li>
+    <li>Select suppliers and products that prioritize sustainability, such as those offering minimal packaging, take-back schemes, or recycling programs.</li>
+    <li>Participate in freezer management programs to optimize storage efficiency and reduce energy consumption.</li>
+    <li>Use centralized pick-up and delivery stations to reduce the environmental impact of frequent individual shipments and streamline logistics.</li>
+    <li>Purchasing supplies in bulk can reduce packaging waste, provided there is adequate storage space.</li>
+    <li>Choose suppliers and products that prioritize sustainability, such as those with minimal packaging or recycling programs.</li>
+    <li>Participate in freezer management programs to optimize energy efficiency.</li>
+    <li>Utilize centralized pick-up and delivery stations to streamline logistics and reduce environmental impact.</li>
+</ul>
+<p><b>Sample usage and storage</b></p>
+<p>Proper documentation and transparent communication regarding sample storage are essential for efficient and responsible research continuity:</p>
+<ul>
+    <li>Provide comprehensive details about sample storage after your Ph.D., including who has access, the purpose of storage, and how samples will be used.</li>
+    <li>Sharing complete information about methodologies and stored samples before leaving the institution is crucial.</li>
+    <li>Maintain a clear, up-to-date inventory of all samples left in deep freezers by previous researchers.</li>
+    <li>Lack of detailed information often renders samples unusable and raises safety concerns.</li>
+    <li>Withholding information creates knowledge gaps and can lead to unnecessary repetition of experiments.</li>
+    <li>Tracking genetic constructs and questioning their necessity reflects scientific responsibility and curiosity.</li>
+    <li>Establishing Material Transfer Agreements (MTAs) is an important step to formalize sample sharing and usage rights.</li>
+</ul>
+<p><b>Consumables</b></p>
+<p>Reducing the environmental impact of lab consumables involves making conscious choices and exploring recycling opportunities:</p>
+<ul>
+    <li>Opt for reusable alternatives where possible, e.g., using glass tubes instead of single-use Falcon tubes.</li>
+    <li>Recycle clean plastic items, such as tip boxes, media bottles, and foam shippers, whenever feasible.</li>
+    <li>If plastic use is unavoidable, recycle responsibly. While recycling isn’t without its challenges, it is far preferable to landfill disposal. Some companies are now innovating ways to reclaim even difficult-to-recycle plastics.</li>
+    <li>Tufts University, in collaboration with Green Labs, runs a successful recycling initiative for plastic packaging like clean media bottles and pipette tip boxes.</li>
+    <li>MilliporeSigma® offers a Polystyrene Cooler Return Program, where customers can return used insulated coolers with prepaid labels. These are inspected and, if suitable, reused, reducing waste and extending the lifecycle of packaging materials.</li>
+</ul>
+
+<p><b>Responsible awareness</b></p>
+<p>Fostering a culture of responsibility and sustainability in the lab begins with awareness and collective action:</p>
+<ul>
+    <li>All students and researchers (Master’s, Ph.D., and Postdocs) should understand what happens to the waste they generate, how it is handled, treated, and ultimately disposed of.</li>
+    <li>Researchers must be familiar with principles of informed consent, including when it is appropriate to seek renewed consent and how to communicate ethically and clearly with participants.</li>
+    <li>Regularly exploring open-access resources and sustainability-focused platforms can offer new ideas and best practices for building a more sustainable laboratory environment.</li>
+    <li>Promote sustainable practices within the lab: set shared sustainability goals, involve team members, and track progress collaboratively.</li>
+    <li>Consider starting a composting initiative. Partner with a local composting service to collect compostable items such as paper towels, napkins, paper plates, and leftover food. The resulting compost can be used to support plant growth in or around your lab premises, combining ecological benefit with community engagement.</li>
+</ul>
+    </main>
+</body>
+</html>

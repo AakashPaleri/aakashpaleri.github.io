@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Introduction to the Toolbox</title>
+  <link rel="stylesheet" href="styles.css" />
+<style>
+    :root {
+      --bg-main: #d9f5e6;
+      --header-bg: #2f5d50;
+      --nav-bg: #3d6d5d;
+      --tab-bg: #ffffff;
+      --tab-hover: #e0f0e9;
+      --tab-text: #2f5d50;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-main);
+    }
+
+    header {
+      background-color: var(--header-bg);
+      padding: 1rem 0;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      color: white;
+      font-size: 2rem;
+    }
+
+    nav {
+      background-color: var(--nav-bg);
+      display: flex;
+      justify-content: center;
+      padding: 0.5rem;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .dropdown {
+      position: relative;
+      margin: 0 0.5rem;
+    }
+
+    .tab {
+      background-color: var(--tab-bg);
+      color: var(--tab-text);
+      padding: 10px 18px;
+      border-radius: 10px 10px 0 0;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .tab:hover {
+      background-color: var(--tab-hover);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      min-width: 200px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 0 0 10px 10px;
+      z-index: 1001;
+    }
+
+    .dropdown-content a {
+      color: var(--tab-text);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: var(--tab-hover);
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body> <!-- Paste the same header and nav here from index.html -->
+ 
+<div id="nav-placeholder"></div>
+
+<script>
+  fetch('nav.html')
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('nav-placeholder').innerHTML = data;
+    });
+</script>
+  <main>
+    <h2>BIOART</h2>
+<p>Bio-art represents a crossover of art and the biological sciences, with living matter, such as genes, cells, or animals, as its new media. Bioartists often collaborate with scientists to create artworks that explore the boundaries between art, science, and ethics to raise profound questions on issues such as human relationships with nature, the difference between natural and artificial, and the role of technology in human life, among others. However, it also raises complex ethical issues at the intersection of bioethics and ethics of art.</p>
+<p><b>What are the ethical issues in bioart?</b></p>
+<p><b>1. Use and Manipulation of Living Organisms:</b> Bioartists working in labs with scientists mostly work with living organisms or living material like microbes or animal/plant tissues. This could raise concerns surrounding the instrumentalization of life, wherein living organisms are treated as aesthetic materials. </p>
+<p><b>2. Biosafety and Biosecurity:</b> Public exhibition of artworks created using living organisms or their materials could trigger biosafety and biosecurity concerns for health and environmental risks. Adequate safety measures and clearly defined responsibilities must be established in advance to address potential unintended consequences. </p>
+<p><b>3. Public Understanding and Misrepresentation:</b> While bioart aims to create awareness among the general public in an artistic manner, it can end up confusing or misleading the public if presented without sufficient context or proper introduction. It is important to ensure that bioart can support public engagement without distorting the intended message. </p>
+<p><b>4. Blurring Boundaries Between Art and Experimentation:</b> Bioart sometimes challenged the line between aesthetic expression and scientific research. This raises questions about what ethical standards apply when art enters scientific labs.  When artists engage in laboratory-based practices using living cells, microbes, or genetic material, it becomes unclear whether scientific or artistic ethical standards apply. This ambiguity necessitates new frameworks for accountability, oversight, and interdisciplinary ethical reflection.</p>
+<p><b>5. Ownership, Patents, and Biocolonialism:</b> When bioart uses genetic material from plants, animals, or humans, it can raise questions about the ownership of the artwork or the organisms used in the artwork. In case of using indigenous materials for the artwork, factors such as consent, proper acknowledgement, etc, have to be taken care of to avoid issues of biopiracy and cultural appropriation. </p>
+
+    </main>
+</body>
+</html>

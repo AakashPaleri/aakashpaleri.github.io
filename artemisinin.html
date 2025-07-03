@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Introduction to the Toolbox</title>
+  <link rel="stylesheet" href="styles.css" />
+<style>
+    :root {
+      --bg-main: #d9f5e6;
+      --header-bg: #2f5d50;
+      --nav-bg: #3d6d5d;
+      --tab-bg: #ffffff;
+      --tab-hover: #e0f0e9;
+      --tab-text: #2f5d50;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-main);
+    }
+
+    header {
+      background-color: var(--header-bg);
+      padding: 1rem 0;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      color: white;
+      font-size: 2rem;
+    }
+
+    nav {
+      background-color: var(--nav-bg);
+      display: flex;
+      justify-content: center;
+      padding: 0.5rem;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .dropdown {
+      position: relative;
+      margin: 0 0.5rem;
+    }
+
+    .tab {
+      background-color: var(--tab-bg);
+      color: var(--tab-text);
+      padding: 10px 18px;
+      border-radius: 10px 10px 0 0;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .tab:hover {
+      background-color: var(--tab-hover);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      min-width: 200px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 0 0 10px 10px;
+      z-index: 1001;
+    }
+
+    .dropdown-content a {
+      color: var(--tab-text);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: var(--tab-hover);
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body> <!-- Paste the same header and nav here from index.html -->
+ 
+<div id="nav-placeholder"></div>
+
+<script>
+  fetch('nav.html')
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('nav-placeholder').innerHTML = data;
+    });
+</script>
+  <main>
+    <h2>SEMI-SYNTHETIC ARTEMISININ</h2>
+   
+    <p><b>What is semi-synthetic artemisinin?</b></p>
+<p>Artemisinin, a key malaria treatment, is traditionally extracted from the sweet wormwood plant (Artemisia annua). However, this method is labor-intensive and yield-dependent. Semi-synthetic artemisinin, developed using genetically engineered yeast, offers a stable supply of antimalarial drugs for high-burden regions. However, despite its medical promise, its production raises significant ethical concerns.</p>
+<p><b>What are the ethical issues in semi-synthetic artemisinin production?</b></p>
+<p><b>1. Impact on Farmers and Local Economies:</b> The shift to semi-synthetic artemisinin threatens the livelihoods of thousands of farmers in Asia and Africa who depend on cultivating Artemisia annua, often their sole income source. This change also impacts workers in processing, packaging, and distribution, weakening local economies and raising concerns about fairness and the socioeconomic effects of technological advancements.</p>
+<p><b>2. Equity and Accessibility: </b> remains a significant issue in the Global South, yet semi-synthetic artemisinin production is concentrated in Western nations, where malaria is less prevalent. This raises concerns about equitable benefit distribution, as high production and distribution costs could make the drug inaccessible to low-income, malaria-endemic regions.
+<p><b>3. Patenting and Monopoly:</b> production risks centralizing control with a few corporations through patents and monopolies. This dependency could weaken the resilience of the global artemisinin supply chain, particularly during economic or political instability.</p>
+<p><b>4. Environmental Justice:</b> Although reducing agricultural reliance, semi-synthetic production requires significant energy and sugar inputs, raising sustainability concerns. Excessive sugarcane cultivation leads to monocropping, depletes water resources, disrupts ecosystems, and increases the carbon footprint.</p>
+<p><b>5. Loss of Traditional Knowledge Systems:</b> The complete transition to lab-based production risks eroding traditional farming practices and the ecological knowledge embedded in them. Balancing technological innovation with preserving traditional systems is essential for ecosystem protection and cultural heritage.</p>
+    </main>
+</body>
+</html>

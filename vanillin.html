@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Introduction to the Toolbox</title>
+  <link rel="stylesheet" href="styles.css" />
+<style>
+    :root {
+      --bg-main: #d9f5e6;
+      --header-bg: #2f5d50;
+      --nav-bg: #3d6d5d;
+      --tab-bg: #ffffff;
+      --tab-hover: #e0f0e9;
+      --tab-text: #2f5d50;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-main);
+    }
+
+    header {
+      background-color: var(--header-bg);
+      padding: 1rem 0;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      color: white;
+      font-size: 2rem;
+    }
+
+    nav {
+      background-color: var(--nav-bg);
+      display: flex;
+      justify-content: center;
+      padding: 0.5rem;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .dropdown {
+      position: relative;
+      margin: 0 0.5rem;
+    }
+
+    .tab {
+      background-color: var(--tab-bg);
+      color: var(--tab-text);
+      padding: 10px 18px;
+      border-radius: 10px 10px 0 0;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .tab:hover {
+      background-color: var(--tab-hover);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      min-width: 200px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 0 0 10px 10px;
+      z-index: 1001;
+    }
+
+    .dropdown-content a {
+      color: var(--tab-text);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: var(--tab-hover);
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body> <!-- Paste the same header and nav here from index.html -->
+ 
+<div id="nav-placeholder"></div>
+
+<script>
+  fetch('nav.html')
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('nav-placeholder').innerHTML = data;
+    });
+</script>
+  <main>
+    <h2>SEMI-SYNTHETIC VANILLIN</h2>
+<p>Natural vanillin is produced from natural vanillin beans from the Vanilla planifolia orchid. Natural vanillin production faces several challenges, such as the limitation of vanilla orchid cultivation, a time-consuming and labor-intensive extraction process, high cost, and low yield, among others. Semi-synthetic vanillin produced from lignin, guaiacol, and eugenol acts as a more sustainable alternative to petrochemical vanillin and a more affordable alternative to natural vanilla extract. However, the production of semi-synthetic vanillin raises ethical concerns.</p>
+<p><b>What are the ethical issues in semi-synthetic artemisinin production?</b></p>
+<p><b>1. Labelling ambiguity:</b> Semi-synthetic vanillin is often chemically identical to natural vanillin but is produced via chemical transformation of plant-derived materials (like lignin or ferulic acid). Despite its plant origin, regulatory frameworks in many countries require it to be labeled as “artificial flavor.” This labeling ambiguity confuses consumers, especially those who wish to avoid artificial additives or support ethically sourced products. Some manufacturers exploit the “natural” connotation of bio-based origins, leading to greenwashing, marketing the product as eco-friendly without fully disclosing its synthetic processing.</p>
+<p><b>2. Impact on traditional vanilla farmers and local economies:</b> The affordability and scale of semi-synthetic vanillin reduce global demand for natural vanilla, which is labor-intensive and cultivated mainly by smallholder farmers in countries like Madagascar, Papua New Guinea, and Uganda. The shift toward semi-synthetic and synthetic substitutes can undermine livelihoods, cultural traditions, and regional economies. These farmers may lack alternative income sources and often bear the brunt of fluctuating global commodity prices.</p>
+<p><b>3. “Naturalness” and ontological ambiguity:</b> Semi-synthetic vanillin blurs the line between natural and artificial. Though plant-derived, its industrial processing challenges common notions of authenticity, especially in food and fragrance contexts where “natural” carries cultural, symbolic, and safety-related meanings. This raises philosophical questions about what consumers truly value as “natural.”</p>
+<p><b>4. Corporate Concentration and Access:</b> Like semi-synthetic artemisinin, semi-synthetic vanillin is often controlled by large biotech firms holding patents on processes and organisms. This raises concerns about market monopolies, restricted access to innovation, and unfair value distribution, where corporations profit while producers of raw materials receive little compensation.</p>
+<p><b>5. Epistemic and Cultural Erasure:</b> Natural vanilla cultivation is rooted in local traditions and knowledge. As synthetic alternatives dominate markets, these cultural practices risk being erased or devalued, reinforcing Western techno-scientific dominance over diverse, place-based approaches to agriculture and marginalizing artisanal methods developed over centuries.</p>
+
+    </main>
+</body>
+</html>
