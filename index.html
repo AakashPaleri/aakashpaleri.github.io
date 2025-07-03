@@ -6,9 +6,9 @@
   <title>Varsha's Toolbox</title>
   <style>
     :root {
-      --bg-main: #d9f5e6; /* pale green */
-      --accent-dark: #2f5d50; /* dark sea green */
-      --accent-light: #4c8c74; /* lighter green for hover */
+      --bg-main: #d9f5e6;
+      --accent-dark: #2f5d50;
+      --accent-light: #4c8c74;
       --button-bg: #ffffff;
       --button-text: #2f5d50;
     }
@@ -40,6 +40,7 @@
       position: relative;
       display: inline-block;
       margin: 1rem;
+      border: 2px dashed red; /* temporary for debugging */
     }
 
     .dropdown button {
@@ -88,15 +89,52 @@
     .dropdown:hover .dropdown-content {
       display: block;
     }
-
-    @media (max-width: 600px) {
-      .dropdown {
-        display: block;
-        text-align: center;
-      }
-    }
   </style>
 </head>
 <body>
 
   <header>
+    <h1>Varsha's Toolbox</h1>
+  </header>
+
+  <div class="dropdown">
+    <button>Ethics-by-design Toolbox</button>
+    <div class="dropdown-content">
+      <a href="#">Introduction to the toolbox</a>
+      <a href="#">SOP for ethics-science integration</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <button>Ethics framework</button>
+    <div class="dropdown-content">
+      <a href="#">Small video on introduction to ethics</a>
+      <a href="#">Ethical principles</a>
+      <a href="#">Relationship with stakeholders</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <button>Real life examples</button>
+    <div class="dropdown-content">
+      <a href="#">Case studies</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <button>Toolbox</button>
+    <div class="dropdown-content">
+      <a href="#">Self-analysis Questionnaire</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <button>Green Lab</button>
+    <div class="dropdown-content">
+      <a href="#">Lab sustainability practices</a>
+      <a href="#">Suggestions (open to users)</a>
+    </div>
+  </div>
+
+</body>
+</html>
