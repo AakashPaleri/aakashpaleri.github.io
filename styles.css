@@ -15,12 +15,11 @@ body {
 }
 
 .site-content {
-  max-width: 900px;
-  margin: 0.25rem 0.25rem 0.25rem 0.25rem;
+  max-width: 1000px;
+  margin: 40px auto 0 auto; 
   background: #fff;
-  border-radius: 0.5rem;
-  padding: 2rem 2rem 4rem 2rem;
-  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.04);
+  border-radius: 2rem;
+  padding: 2.5rem 2.5rem 3.5rem 2.5rem;
 }
 
 .custom-spacing {
