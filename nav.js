@@ -1,12 +1,11 @@
-// nav.js
 document.addEventListener('DOMContentLoaded', () => {
   const nav = document.getElementById("responsiveNav");
   const hamburger = document.getElementById("hamburger");
-  if (!nav || !hamburger) return; // <-- add this line for safety
+  if (!nav || !hamburger) return; // Safety: stop if nav or button missing
 
   const drawer = nav.querySelector('.nav-drawer');
-  if (!drawer) return; // <-- add this line for safety
-  
+  if (!drawer) return; // Safety: stop if nav-drawer missing
+
   // Collapse menu by default on page load
   function collapseNav() {
     nav.classList.remove("expanded");
@@ -19,10 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = "hidden";
   }
 
-  // Always start collapsed
   collapseNav();
 
-  // Hamburger toggles expanded/collapsed and drawer overlay
   hamburger.addEventListener("click", (e) => {
     e.stopPropagation();
     if (nav.classList.contains("expanded")) {
@@ -32,14 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Clicking overlay closes menu (if open)
   nav.addEventListener("click", function(e) {
     if (e.target === nav && nav.classList.contains("expanded")) {
       collapseNav();
     }
   });
 
-  // Expand/collapse dropdowns inside the drawer
   drawer.querySelectorAll(".dropdown > .tab").forEach(tab => {
     tab.addEventListener("click", function(e) {
       let dropdown = this.parentElement;
@@ -51,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // When a link is clicked, close nav and allow scroll again
   drawer.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", function() {
       if (window.innerWidth <= 980) {
@@ -60,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Desktop: Highlight current page tab
   const links = nav.querySelectorAll(".dropdown-content a, .tab");
   const currentPath = window.location.pathname.split("/").pop();
   links.forEach(link => {
@@ -70,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Desktop: Dropdowns on hover
   nav.querySelectorAll(".dropdown").forEach(dropdown => {
     dropdown.addEventListener("mouseenter", () => {
       if (window.innerWidth > 980) dropdown.classList.add("expanded");
@@ -80,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Keyboard accessibility for dropdowns
   links.forEach(tab => {
     tab.setAttribute("tabindex", "0");
     tab.addEventListener("keydown", (e) => {
@@ -92,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Collapse menu if resizing to desktop view
   window.addEventListener("resize", () => {
     if (window.innerWidth > 980) {
       collapseNav();
