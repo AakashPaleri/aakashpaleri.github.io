@@ -71,7 +71,8 @@ nav {
   display: flex;
   justify-content: center;
   flex-wrap: nowrap;
-  padding: 0.5rem 0 0 0;
+  /* Remove vertical padding! */
+  padding: 0;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -83,8 +84,9 @@ nav {
   left: 0;
   margin: 0 !important;
   border-radius: 0 !important;
-  padding-bottom: 0 !important;
   box-sizing: border-box;
+  /* Add a bottom border for visual separation */
+  border-bottom: 2px solid #1b365f;
 }
 
 .nav-drawer {
@@ -106,9 +108,11 @@ nav {
   font-weight: bold;
   transition: background-color 0.3s;
   font-size: clamp(0.6rem, 1vw, 1rem);
-  margin: 0 0.5vw;
+  margin: 0 0.5vw 0 0.5vw; /* Remove bottom margin */
   text-align: center;
   white-space: nowrap;
+  box-sizing: border-box;
+  /* No vertical margin so tabs flush with nav bg */
 }
 .tab:first-child { margin-left: 0; }
 .tab:last-child { margin-right: 0; }
@@ -153,11 +157,12 @@ nav {
     justify-content: flex-start;
     align-items: stretch;
     width: 100vw;
-    padding: 0.2rem 0 0 0;
+    padding: 0;
     overflow-x: auto !important;
     overflow-y: visible;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none; /* Firefox hide */
+    border-bottom: 2px solid #1b365f;
   }
   nav::-webkit-scrollbar, .nav-drawer::-webkit-scrollbar { display: none; }
   .tab, .dropdown {
@@ -168,7 +173,7 @@ nav {
   .tab {
     font-size: 0.93rem;
     padding: 8px 8px;
-    margin: 0 0.2vw;
+    margin: 0 0.2vw 0 0.2vw;  /* No vertical margin */
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -197,6 +202,7 @@ nav {
     z-index: 1000;
     left: 0;
     margin: 0 !important;
+    border-bottom: none;
   }
   .nav-drawer {
     flex-direction: column;
