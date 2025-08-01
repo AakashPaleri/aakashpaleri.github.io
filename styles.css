@@ -30,11 +30,12 @@ body {
   }
 }
 
+/* ------------ HEADER & HOVER EFFECT ------------ */
 header {
   background-color: var(--header-bg);
   display: flex;
   align-items: center;
-  justify-content: center; /* NEW: Center everything in the header */
+  justify-content: center;
   padding: 0 0.75rem;
   height: 62px;
   z-index: 1001;
@@ -42,6 +43,10 @@ header {
   width: 100%;
   max-width: 100vw;
   box-sizing: border-box;
+  transition: background 0.5s cubic-bezier(.42,.1,.52,1.02);
+}
+header:hover {
+  background: linear-gradient(90deg, #1b365f 80%, #3ad29f 150%);
 }
 header h1 {
   margin: 0;
@@ -55,28 +60,27 @@ header h1 {
   text-overflow: ellipsis;
   white-space: nowrap;
   font-weight: 700;
-  text-align: center; /* Center text inside header */
+  text-align: center;
   display: block;
 }
-
-header a {
+header a.nav-title-link {
   color: white;
   text-decoration: none;
   display: inline-block;
-  transition: transform 0.2s ease-in-out;
+  transition: color 0.25s;
+}
+header a.nav-title-link:hover {
+  color: #3ad29f;
+  text-decoration: none;
 }
 
-header a:hover {
-  transform: scale(1.05); /* grows by 5% */
-}
-
-/* Hamburger on left, h1 fully centered */
+/* ------------ HAMBURGER: only show on mobile ------------ */
 .nav-toggle {
+  display: none; /* Hide on desktop */
   position: absolute;
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  display: block;
   border: none;
   background: var(--nav-bg);
   color: white;
@@ -90,9 +94,12 @@ header a:hover {
   z-index: 100000;
   flex-shrink: 0;
 }
-
 @media (max-width: 980px) {
-  .nav-toggle { display: block; }
+  .nav-toggle {
+    display: block; /* Show on mobile/tablet */
+    pointer-events: auto;
+    z-index: 100001;
+  }
   header h1 {
     font-size: clamp(1.0rem, 4.4vw, 1.4rem);
     padding-right: 0.2em;
@@ -161,7 +168,6 @@ nav {
   nav.collapsed {
     pointer-events: none;
   }
-  /* HAMBURGER: always clickable on mobile */
   .nav-toggle {
     pointer-events: auto;
     z-index: 100001;
@@ -212,7 +218,6 @@ nav {
   }
 }
 
-/* --- rest of your nav, dropdown, tab, etc. styles remain unchanged --- */
 .dropdown { position: relative; margin: 0 0.5rem; }
 .tab {
   background-color: var(--tab-bg);
