@@ -36,19 +36,19 @@ header h1 {
   font-size: 2rem;
 }
 
-/* HIGHLIGHTED: allow horizontal scroll + shrink/wrap for nav */
+/* --- NAVIGATION BAR --- */
 nav {
   background-color: var(--nav-bg);
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;           /* HIGHLIGHTED */
+  flex-wrap: nowrap;     /* HIGHLIGHTED: force one row, never wrap */
   padding: 0.5rem;
   position: sticky;
   top: 0;
   z-index: 1000;
   transition: all 0.3s ease-in-out;
-  overflow-x: auto;          /* HIGHLIGHTED */
-  white-space: nowrap;       /* HIGHLIGHTED */
+  /* Removed overflow-x: auto to avoid scrolling */
+  white-space: nowrap;
 }
 
 .dropdown {
@@ -56,7 +56,6 @@ nav {
   margin: 0 0.5rem;
 }
 
-/* HIGHLIGHTED: responsive font size and shrink for tabs */
 .tab {
   background-color: var(--tab-bg);
   color: var(--tab-text);
@@ -66,10 +65,12 @@ nav {
   display: inline-block;
   font-weight: bold;
   transition: background-color 0.3s;
-  flex-shrink: 1;                   /* HIGHLIGHTED */
-  min-width: 80px;                  /* HIGHLIGHTED */
-  font-size: clamp(0.8rem, 2vw, 1rem); /* HIGHLIGHTED */
+  flex: 1 1 0;                /* HIGHLIGHTED: allow shrinking/growing equally */
+  min-width: 60px;            /* HIGHLIGHTED: allow to get pretty small */
+  max-width: 180px;           /* HIGHLIGHTED: don't get too wide */
+  font-size: clamp(0.65rem, 1.1vw, 1rem); /* HIGHLIGHTED: shrink text as needed */
   margin: 0 5px;
+  text-align: center;
   white-space: nowrap;
 }
 
@@ -124,14 +125,14 @@ main {
   margin: auto;
 }
 
-/* --- Responsive behavior below 980px --- */
+/* --- Responsive: below 980px switches to hamburger --- */
 @media (max-width: 980px) {
   nav {
     flex-direction: column;
     align-items: flex-start;
     flex-wrap: nowrap;
     overflow: visible;
-    white-space: normal;    /* HIGHLIGHTED: allow multi-line on mobile */
+    white-space: normal;
   }
 
   .nav-toggle {
@@ -156,21 +157,21 @@ main {
     border-radius: 0;
     padding: 12px;
     font-size: 1rem;
-    min-width: unset;      /* HIGHLIGHTED: remove min-width on mobile */
+    min-width: unset;
   }
 
   nav.collapsed .dropdown {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(.36,.66,.04,1); /* HIGHLIGHTED: smooth animation */
-    display: block;       /* HIGHLIGHTED: necessary for max-height animation */
+    transition: max-height 0.4s cubic-bezier(.36,.66,.04,1);
+    display: block;
   }
 
   nav.expanded .dropdown {
-    max-height: 500px;    /* HIGHLIGHTED: big enough for menu */
+    max-height: 500px;
     overflow: visible;
     transition: max-height 0.4s cubic-bezier(.36,.66,.04,1);
-    display: block;       /* HIGHLIGHTED */
+    display: block;
   }
 
   .dropdown-content {

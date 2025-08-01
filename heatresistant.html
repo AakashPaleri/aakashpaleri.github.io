@@ -14,10 +14,9 @@
 <script>
   fetch('nav.html')
     .then(res => res.text())
-    .then(data => {
-      document.getElementById('nav-placeholder').innerHTML = data;
-    });
+    .then(html => { document.getElementById('nav-placeholder').innerHTML = html; });
 </script>
+<script src="nav.js"></script>
   <main>
     <h2>ENGINEERED HEAT-RESISTANT CORAL </h2>
 <p>Global climate change has led to a significant rise in seawater temperatures, resulting in widespread coral bleaching and the degradation of coral reef ecosystems. These reefs are vital for marine biodiversity, coastal protection, and the livelihoods of millions. Their loss signals profound ecological disruption and highlights the urgency of climate action. Synthetic Biology has a solution to this problem. Using synthetic biology, corals’ DNA can be redesigned to withstand higher temperatures, producing “heat-resistant coral”. However, this also raises some ethical concerns. </p>

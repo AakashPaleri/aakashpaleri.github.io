@@ -3,7 +3,7 @@
 </header>
 
 <nav class="collapsed" id="responsiveNav">
-  <button class="nav-toggle" id="hamburger">☰ Menu</button> <!-- HIGHLIGHTED: id added for JS -->
+  <button class="nav-toggle" id="hamburger">☰ Menu</button>
   <div class="dropdown">
     <a class="tab" href="index.html">🏠&nbsp;Home</a>
   </div>
@@ -52,57 +52,3 @@
     <a class="tab" href="partner.html">Partner with Us</a>
   </div>
 </nav>
-
-<script>
-  // HIGHLIGHTED: Re-attach toggle logic after fetch
-  document.addEventListener('DOMContentLoaded', () => {
-    const toggleButton = document.getElementById("hamburger");
-    const nav = document.getElementById("responsiveNav");
-    if (toggleButton && nav) {
-      toggleButton.addEventListener("click", () => {
-        nav.classList.toggle("expanded");
-        nav.classList.toggle("collapsed");
-      });
-    }
-
-    // Highlight current page tab (auto by URL)
-    const links = nav.querySelectorAll(".dropdown-content a, .tab");
-    const currentPath = window.location.pathname.split("/").pop();
-    links.forEach(link => {
-      const href = link.getAttribute("href");
-      if (href === currentPath) {
-        link.classList.add("current");
-      }
-    });
-
-    // Close nav after click on mobile
-    links.forEach(link => {
-      link.addEventListener("click", () => {
-        if (window.innerWidth <= 980) {
-          nav.classList.remove("expanded");
-          nav.classList.add("collapsed");
-        }
-      });
-    });
-
-    // Keyboard accessibility for dropdowns
-    const dropdowns = nav.querySelectorAll(".dropdown");
-    dropdowns.forEach(dropdown => {
-      const tab = dropdown.querySelector(".tab");
-      if (tab) {
-        tab.setAttribute("tabindex", "0");
-        tab.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            const content = dropdown.querySelector(".dropdown-content");
-            if (content) {
-              // For desktop, toggle dropdown display
-              const isOpen = content.style.display === "block";
-              content.style.display = isOpen ? "none" : "block";
-            }
-          }
-        });
-      }
-    });
-  });
-</script>
