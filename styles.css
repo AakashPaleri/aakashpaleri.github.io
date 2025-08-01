@@ -5,6 +5,7 @@
   --tab-bg: #ffffff;
   --tab-hover: #e0f0e9;
   --tab-text: #1b365f;
+  --nav-drawer-bg: #203258;  /* HIGHLIGHTED: deep blue for overlay */
 }
 
 body {
@@ -31,12 +32,19 @@ header {
   z-index: 1001;
   position: relative;
 }
-
 header h1 {
   margin: 0;
   color: white;
   font-size: 2rem;
 }
+
+header a {
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.2s ease-in-out;
+}
+header a:hover { transform: scale(1.02); }
 
 nav {
   background-color: var(--nav-bg);
@@ -82,12 +90,10 @@ nav {
 .tab:hover {
   background-color: var(--tab-hover);
 }
-
 .tab:focus {
   outline: 2px solid var(--header-bg);
   outline-offset: 2px;
 }
-
 .tab.current {
   background-color: var(--tab-hover);
   box-shadow: inset 0 -3px 0 var(--header-bg);
@@ -104,9 +110,9 @@ nav {
   left: 0;
   background-color: white;
   min-width: 200px;
-  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.12);
+  box-shadow: 0 8px 24px 0 rgba(0,0,0,0.14); /* HIGHLIGHTED: more shadow */
   border-radius: 0 0 10px 10px;
-  z-index: 1100 !important;
+  z-index: 99999 !important;  /* HIGHLIGHTED: always above page content */
   margin-top: 0.2rem;
 }
 
@@ -116,10 +122,7 @@ nav {
   text-decoration: none;
   display: block;
 }
-
-.dropdown-content a:hover {
-  background-color: var(--tab-hover);
-}
+.dropdown-content a:hover { background-color: var(--tab-hover); }
 
 .dropdown:hover .dropdown-content,
 .dropdown:focus-within .dropdown-content {
@@ -134,97 +137,150 @@ main {
   z-index: 1;
 }
 
+/* ======== HAMBURGER OVERLAY MOBILE NAV (Shearings.com style) ======== */
 @media (max-width: 980px) {
-  header {
-    z-index: 2001;
-    position: relative;
-  }
   nav {
+    position: fixed !important;         /* HIGHLIGHTED: overlay on top */
+    left: 0;
+    top: 0;
+    height: 100vh;
     width: 100vw !important;
     max-width: 100vw !important;
     margin: 0 !important;
-    left: 0;
-    right: 0;
     border-radius: 0 !important;
+    background: transparent !important; /* HIGHLIGHTED: overlay bg is below */
     box-shadow: none !important;
-    padding: 0.5rem 0;
-    position: static;
-    background: var(--nav-bg);
-    z-index: 2000 !important;
+    z-index: 99999 !important;
     display: block;
-    overflow: visible;
+    padding: 0;
+    pointer-events: none;               /* HIGHLIGHTED: disables pointer if closed */
   }
+  nav.expanded {
+    pointer-events: auto;               /* HIGHLIGHTED: pointer enabled when open */
+  }
+
+  /* The semi-transparent dark background overlay */
+  nav::before {
+    content: "";
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 28, 46, 0.85); /* HIGHLIGHTED: overlay effect */
+    z-index: 99998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s;
+  }
+  nav.expanded::before {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
   .nav-toggle {
     display: block;
-    border-radius: 0;
-    margin: 0 0 1rem 0;
-    width: 100vw;
-    max-width: 100vw;
+    position: fixed;
+    top: 15px;
+    right: 16px;
+    z-index: 100000;    /* HIGHLIGHTED: Always above nav */
+    border: none;
     background: var(--nav-bg);
     color: white;
     font-weight: bold;
-    font-size: 1.1rem;
-    border: none;
-    text-align: left;
-    padding-left: 30px;
+    font-size: 1.15rem;
+    border-radius: 7px;
+    padding: 12px 18px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.09);
   }
-  .dropdown {
-    width: 100vw;
-    margin: 0 0 0.7rem 0;
-    padding: 0;
-    background: none;
-    display: block;
+  nav.expanded .nav-toggle {
+    background: #fff;
+    color: var(--nav-bg);
+    border: 1px solid #ccc;
   }
-  .tab {
-    border-radius: 10px;
+
+  /* The drawer panel itself */
+  nav .nav-drawer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 85vw;
+    max-width: 375px;
+    height: 100vh;
+    background: var(--nav-drawer-bg);
+    box-shadow: -2px 0 32px rgba(0,0,0,0.16);
+    z-index: 99999;
+    transform: translateX(100%);
+    transition: transform 0.32s cubic-bezier(.52,.01,.5,1.02);
+    padding-top: 60px; /* space for toggle button */
+    pointer-events: auto;
+  }
+  nav.expanded .nav-drawer {
+    transform: translateX(0%);
+  }
+
+  /* Hide main nav bar links when not in the drawer */
+  nav .dropdown,
+  nav .tab {
+    display: none !important;
+  }
+  nav.expanded .nav-drawer .dropdown,
+  nav.expanded .nav-drawer .tab {
+    display: block !important;
+  }
+
+  /* The links inside the drawer */
+  nav .nav-drawer .tab {
     background: #fff;
     color: var(--tab-text);
-    margin: 0;
-    margin-left: 30px;
-    margin-right: 30px;
-    width: calc(100vw - 60px);
-    max-width: calc(100vw - 60px);
-    font-size: 1.1rem;
+    border-radius: 7px;
+    margin: 0.7rem 18px 0.7rem 18px;
+    width: auto;
+    font-size: 1.15rem;
     font-weight: 600;
+    letter-spacing: 0.02em;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     border: none;
-    padding: 12px 0;
+    padding: 15px 0;
     text-align: center;
     transition: background 0.2s;
     display: block;
   }
-  .dropdown-content {
+
+  nav .nav-drawer .tab.current {
+    background: var(--tab-hover);
+    color: var(--nav-bg);
+  }
+
+  nav .nav-drawer .dropdown-content {
     position: static !important;
-    z-index: 2002 !important;
+    z-index: 100000;
     box-shadow: none;
     border-radius: 10px;
     background: #f5f8f9;
-    margin-top: 0.4rem;
-    margin-bottom: 0.7rem;
-    padding-bottom: 0.2rem;
-    width: calc(100vw - 60px);
-    margin-left: 30px;
-    margin-right: 30px;
+    margin: 0.2rem 0 0.2rem 0;
+    width: 90%;
     left: 0;
     display: none;
   }
-  .dropdown:hover .dropdown-content,
-  .dropdown:focus-within .dropdown-content {
-    display: block;
+  nav .nav-drawer .dropdown.expanded > .dropdown-content {
+    display: block !important;
   }
-  .dropdown-content a {
+  nav .nav-drawer .dropdown-content a {
     background: #fff;
     color: var(--tab-text);
     text-align: center;
     font-weight: 500;
     border-radius: 7px;
     padding: 13px 0;
-    margin: 0.35rem 0;
+    margin: 0.32rem 0;
     width: 100%;
     display: block;
     box-sizing: border-box;
   }
-  .dropdown-content a:hover {
+  nav .nav-drawer .dropdown-content a:hover {
     background: #e0f0e9;
   }
 }
