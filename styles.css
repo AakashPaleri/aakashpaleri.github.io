@@ -68,14 +68,14 @@ header a.nav-title-link {
   color: white;
   text-decoration: none;
   display: inline-block;
-  transition: color 0.25s;
+  transition: transform 0.2s ease-in-out;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 header a.nav-title-link:hover {
-  color: #3ad29f;
+  transform: scale(1.02); 
   text-decoration: none;
 }
 
