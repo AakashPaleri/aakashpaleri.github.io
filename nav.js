@@ -1,57 +1,107 @@
 // nav.js
 document.addEventListener('DOMContentLoaded', () => {
-  // Wait for nav to be loaded
-  const checkNav = setInterval(() => {
-    const nav = document.getElementById("responsiveNav");
-    const toggleButton = document.getElementById("hamburger");
-    if (nav && toggleButton) {
-      // Attach menu toggle
-      toggleButton.addEventListener("click", () => {
-        nav.classList.toggle("expanded");
-        nav.classList.toggle("collapsed");
-      });
+  const nav = document.getElementById("responsiveNav");
+  const hamburger = document.getElementById("hamburger");
 
-      // Highlight current page tab
-      const links = nav.querySelectorAll(".dropdown-content a, .tab");
-      const currentPath = window.location.pathname.split("/").pop();
-      links.forEach(link => {
-        const href = link.getAttribute("href");
-        if (href === currentPath) {
-          link.classList.add("current");
-        }
-      });
-
-      // Close nav after click on mobile
-      links.forEach(link => {
-        link.addEventListener("click", () => {
-          if (window.innerWidth <= 980) {
-            nav.classList.remove("expanded");
-            nav.classList.add("collapsed");
-          }
-        });
-      });
-
-      // Keyboard accessibility for dropdowns
-      const dropdowns = nav.querySelectorAll(".dropdown");
-      dropdowns.forEach(dropdown => {
-        const tab = dropdown.querySelector(".tab");
-        if (tab) {
-          tab.setAttribute("tabindex", "0");
-          tab.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              const content = dropdown.querySelector(".dropdown-content");
-              if (content) {
-                // For desktop, toggle dropdown display
-                const isOpen = content.style.display === "block";
-                content.style.display = isOpen ? "none" : "block";
-              }
-            }
-          });
-        }
-      });
-
-      clearInterval(checkNav); // stop checking
+  // --- Drawer: create nav drawer and move dropdowns into it on mobile
+  let drawer = document.createElement('div');
+  drawer.className = "nav-drawer";
+  Array.from(nav.children).forEach(child => {
+    if (child.classList && child.classList.contains('dropdown')) {
+      drawer.appendChild(child);
     }
-  }, 50); // check every 50ms for nav load
+  });
+  nav.appendChild(drawer);
+
+  // --- HIGHLIGHTED: Collapse menu by default on page load (mobile and desktop)
+  function collapseNav() {
+    nav.classList.remove("expanded");
+    nav.classList.add("collapsed");
+    document.body.style.overflow = "";
+  }
+  function expandNav() {
+    nav.classList.add("expanded");
+    nav.classList.remove("collapsed");
+    document.body.style.overflow = "hidden";
+  }
+
+  // Always start collapsed
+  collapseNav();
+
+  // --- Hamburger toggles expanded/collapsed and drawer overlay
+  hamburger.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (nav.classList.contains("expanded")) {
+      collapseNav();
+    } else {
+      expandNav();
+    }
+  });
+
+  // Clicking overlay closes menu (if open)
+  nav.addEventListener("click", function(e) {
+    if (e.target === nav && nav.classList.contains("expanded")) {
+      collapseNav();
+    }
+  });
+
+  // --- Expand/collapse dropdowns inside the drawer
+  drawer.querySelectorAll(".dropdown > .tab").forEach(tab => {
+    tab.addEventListener("click", function(e) {
+      let dropdown = this.parentElement;
+      let hasDropdown = dropdown.querySelector(".dropdown-content");
+      if (window.innerWidth <= 980 && hasDropdown) {
+        e.preventDefault();
+        dropdown.classList.toggle("expanded");
+      }
+    });
+  });
+
+  // --- When a link is clicked, close nav and allow scroll again
+  drawer.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", function() {
+      if (window.innerWidth <= 980) {
+        collapseNav();
+      }
+    });
+  });
+
+  // --- Desktop: Highlight current page tab
+  const links = nav.querySelectorAll(".dropdown-content a, .tab");
+  const currentPath = window.location.pathname.split("/").pop();
+  links.forEach(link => {
+    const href = link.getAttribute("href");
+    if (href === currentPath) {
+      link.classList.add("current");
+    }
+  });
+
+  // --- Desktop: Dropdowns on hover
+  nav.querySelectorAll(".dropdown").forEach(dropdown => {
+    dropdown.addEventListener("mouseenter", () => {
+      if (window.innerWidth > 980) dropdown.classList.add("expanded");
+    });
+    dropdown.addEventListener("mouseleave", () => {
+      if (window.innerWidth > 980) dropdown.classList.remove("expanded");
+    });
+  });
+
+  // --- Keyboard accessibility for dropdowns
+  links.forEach(tab => {
+    tab.setAttribute("tabindex", "0");
+    tab.addEventListener("keydown", (e) => {
+      if ((e.key === "Enter" || e.key === " ") && tab.nextElementSibling && tab.nextElementSibling.classList.contains('dropdown-content')) {
+        e.preventDefault();
+        let dropdown = tab.parentElement;
+        dropdown.classList.toggle("expanded");
+      }
+    });
+  });
+
+  // --- HIGHLIGHTED: Collapse menu if resizing to desktop view
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 980) {
+      collapseNav();
+    }
+  });
 });
