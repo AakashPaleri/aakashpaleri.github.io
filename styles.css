@@ -83,8 +83,8 @@ header a.nav-title-link:hover {
   color: white;
   font-weight: bold;
   font-size: 1.00rem;
-  border-radius: 0 0 0px 0px;
-  padding: 0px 0 0px 0;
+  border-radius: 0;           /* << SQUARED CORNERS FIXED */
+  padding: 16px 0;            /* << vertical space for touch */
   cursor: pointer;
   box-shadow: 0 2px 10px rgba(0,0,0,0.09);
   z-index: 2000;
