@@ -4,10 +4,10 @@
   </h1>
 </header>
 
-<!-- Menu CTA is now outside the header, and always present in the DOM -->
-<button class="nav-toggle" id="hamburger" aria-label="Open menu" aria-expanded="false">
+<!-- Menu CTA for mobile accordion, appears only on mobile via CSS -->
+<div class="nav-mobile-cta" id="navMobileCTA" tabindex="0" aria-expanded="false">
   <span class="hamburger-icon">☰</span> Menu
-</button>
+</div>
 
 <nav class="collapsed" id="responsiveNav">
   <div class="nav-drawer">
@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="dropdown">
-      <a class="tab" href="#">Introduce Yourself to Ethics </a>
+      <a class="tab" href="#">Introduce Yourself to Ethics</a>
       <div class="dropdown-content">
         <a href="ethics-video.html">Understanding Ethics</a>
         <a href="principles.html">Ethical Principles</a>
@@ -52,5 +52,3 @@
     </div>
   </div>
 </nav>
-
-<!-- This is a single-line comment -->
