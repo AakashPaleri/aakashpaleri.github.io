@@ -76,7 +76,6 @@ header a.nav-title-link {
 }
 header a.nav-title-link:hover {
   transform: scale(1.02); 
-  text-decoration: none;
 }
 
 /* HAMBURGER: only show on mobile, always clickable */
