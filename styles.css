@@ -126,7 +126,7 @@ nav {
   width: 100%;
 }
 
-.dropdown { position: relative; margin: 0 0.5rem; }
+.dropdown { position: relative; margin: 0 0; }
 .tab {
   background-color: var(--tab-bg);
   color: var(--tab-text);
