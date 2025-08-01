@@ -1,9 +1,16 @@
+<!-- nav.html -->
+<!-- Main NAV HEADER (includes the hamburger and site title) -->
 <header>
-  <button class="nav-toggle" id="hamburger" aria-label="Open menu">☰ Menu</button>
-  <h1>
-    <a href="index.html">Ethics-by-Design Toolbox for Synthetic Biology</a>
+  <button class="nav-toggle" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <!-- This span for a custom icon if desired -->
+    <span class="hamburger-icon">☰</span> Menu
+  </button>
+  <h1 class="nav-header-title">
+    <a href="index.html" class="nav-title-link">Ethics-by-Design Toolbox for Synthetic Biology</a>
   </h1>
 </header>
+
+<!-- NAVIGATION (matches the JS: id="responsiveNav", class="collapsed" by default) -->
 <nav class="collapsed" id="responsiveNav">
   <div class="nav-drawer">
     <div class="dropdown">
@@ -55,3 +62,11 @@
     </div>
   </div>
 </nav>
+<!-- 
+HIGHLIGHTS:
+- Hamburger button has id="hamburger" (for JS)
+- Nav bar has id="responsiveNav" (for JS)
+- nav-drawer exists in the markup (not injected by JS)
+- All dropdowns and links are intact
+- You can add a custom SVG icon in <span class="hamburger-icon"></span> if you like
+-->

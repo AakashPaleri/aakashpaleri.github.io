@@ -2,8 +2,11 @@
 document.addEventListener('DOMContentLoaded', () => {
   const nav = document.getElementById("responsiveNav");
   const hamburger = document.getElementById("hamburger");
-  const drawer = nav.querySelector('.nav-drawer'); // HIGHLIGHTED: Use existing nav-drawer
+  if (!nav || !hamburger) return; // <-- add this line for safety
 
+  const drawer = nav.querySelector('.nav-drawer');
+  if (!drawer) return; // <-- add this line for safety
+  
   // Collapse menu by default on page load
   function collapseNav() {
     nav.classList.remove("expanded");
