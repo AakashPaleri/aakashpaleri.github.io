@@ -14,7 +14,13 @@
 <script>
   fetch('nav.html')
     .then(res => res.text())
-    .then(html => { document.getElementById('nav-placeholder').innerHTML = html; });
+    .then(html => {
+      document.getElementById('nav-placeholder').innerHTML = html;
+      // Now load nav.js only after nav is injected!
+      var script = document.createElement('script');
+      script.src = 'nav.js';
+      document.body.appendChild(script);
+    });
 </script>
   <main class="site-content">
     <h2>Lab Sustainability Practices</h2>
@@ -103,6 +109,5 @@
     <li>Consider starting a composting initiative. Partner with a local composting service to collect compostable items such as paper towels, napkins, paper plates, and leftover food. The resulting compost can be used to support plant growth in or around your lab premises, combining ecological benefit with community engagement.</li>
 </ul>
     </main>
-<script src="nav.js"></script>
 </body>
 </html>

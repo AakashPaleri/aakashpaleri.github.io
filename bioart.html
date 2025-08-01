@@ -14,7 +14,13 @@
 <script>
   fetch('nav.html')
     .then(res => res.text())
-    .then(html => { document.getElementById('nav-placeholder').innerHTML = html; });
+    .then(html => {
+      document.getElementById('nav-placeholder').innerHTML = html;
+      // Now load nav.js only after nav is injected!
+      var script = document.createElement('script');
+      script.src = 'nav.js';
+      document.body.appendChild(script);
+    });
 </script>
   <main class="site-content">
     <h2>BIOART</h2>
@@ -27,6 +33,5 @@
 <p><b>5. Ownership, Patents, and Biocolonialism:</b> When bioart uses genetic material from plants, animals, or humans, it can raise questions about the ownership of the artwork or the organisms used in the artwork. In case of using indigenous materials for the artwork, factors such as consent, proper acknowledgement, etc, have to be taken care of to avoid issues of biopiracy and cultural appropriation. </p>
 
     </main>
-<script src="nav.js"></script>
 </body>
 </html>

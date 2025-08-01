@@ -14,7 +14,13 @@
 <script>
   fetch('nav.html')
     .then(res => res.text())
-    .then(html => { document.getElementById('nav-placeholder').innerHTML = html; });
+    .then(html => {
+      document.getElementById('nav-placeholder').innerHTML = html;
+      // Now load nav.js only after nav is injected!
+      var script = document.createElement('script');
+      script.src = 'nav.js';
+      document.body.appendChild(script);
+    });
 </script>
   <main class="site-content">
     <h2>SEMI-SYNTHETIC VANILLIN</h2>
@@ -27,6 +33,5 @@
 <p><b>5. Epistemic and Cultural Erasure:</b> Natural vanilla cultivation is rooted in local traditions and knowledge. As synthetic alternatives dominate markets, these cultural practices risk being erased or devalued, reinforcing Western techno-scientific dominance over diverse, place-based approaches to agriculture and marginalizing artisanal methods developed over centuries.</p>
 
     </main>
-<script src="nav.js"></script>
 </body>
 </html>

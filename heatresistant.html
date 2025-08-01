@@ -14,7 +14,13 @@
 <script>
   fetch('nav.html')
     .then(res => res.text())
-    .then(html => { document.getElementById('nav-placeholder').innerHTML = html; });
+    .then(html => {
+      document.getElementById('nav-placeholder').innerHTML = html;
+      // Now load nav.js only after nav is injected!
+      var script = document.createElement('script');
+      script.src = 'nav.js';
+      document.body.appendChild(script);
+    });
 </script>
   <main class="site-content">
     <h2>ENGINEERED HEAT-RESISTANT CORAL </h2>
@@ -27,6 +33,5 @@
 <p><b>5. Prioritization and Funding:</b> Large-scale coral engineering projects may divert funds and attention away from low-tech, community-led reef restoration or traditional ecological knowledge systems. This can overshadow low expertise, traditional knowledge systems that focus on more sustainable, long-term solutions.</p>
 
     </main>
-<script src="nav.js"></script>
 </body>
 </html>
