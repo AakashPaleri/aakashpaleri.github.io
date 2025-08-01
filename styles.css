@@ -31,7 +31,7 @@ header {
   padding: 18px 0 18px 0;
   z-index: 1001;
   position: relative;
-  width: 100vw;
+  width: 100%;
   left: 0;
   box-sizing: border-box;
   transition: background 0.5s cubic-bezier(.42,.1,.52,1.02);
@@ -71,7 +71,7 @@ nav {
   display: flex;
   justify-content: center;
   flex-wrap: nowrap;
-  padding: 0.5rem 0 0 0;
+  padding: 0.5rem 0.75vw 0 0.75vw;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -79,7 +79,7 @@ nav {
   overflow: visible;
   min-width: 0;
   white-space: nowrap;
-  width: 100vw;
+  width: 100%;         /* <-- FIXED from 100vw */
   left: 0;
   margin: 0 !important;
   border-radius: 0 !important;
@@ -92,7 +92,7 @@ nav {
   flex-direction: row;
   justify-content: center;
   align-items: stretch;
-  width: 100%;
+  width: 100%;       /* <-- FIXED from 100vw */
 }
 
 .dropdown { position: relative; margin: 0 0.5rem; }
@@ -110,8 +110,6 @@ nav {
   text-align: center;
   white-space: nowrap;
 }
-.tab:first-child { margin-left: 0; }
-.tab:last-child { margin-right: 0; }
 .tab:hover { background-color: var(--tab-hover); }
 .tab:focus {
   outline: 2px solid var(--header-bg);
@@ -152,12 +150,12 @@ nav {
     flex-wrap: nowrap !important;
     justify-content: flex-start;
     align-items: stretch;
-    width: 100vw;
+    width: 100%;  /* <-- FIXED from 100vw! */
     padding: 0.2rem 0 0 0;
     overflow-x: auto !important;
     overflow-y: visible;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox hide */
+    scrollbar-width: none;
   }
   nav::-webkit-scrollbar, .nav-drawer::-webkit-scrollbar { display: none; }
   .tab, .dropdown {
@@ -183,7 +181,7 @@ nav {
 /* ===== MOBILE NAVIGATION ===== */
 @media (max-width: 728px) {
   header {
-    width: 100vw;
+    width: 100%;
     left: 0;
   }
   nav {
@@ -191,7 +189,7 @@ nav {
     position: static;
     background: var(--nav-drawer-bg);
     border-radius: 0 0 18px 18px;
-    width: 100vw !important;
+    width: 100% !important; /* <-- FIXED from 100vw */
     box-shadow: 0 8px 24px 0 rgba(0,0,0,0.11);
     padding: 0;
     z-index: 1000;
@@ -223,9 +221,9 @@ nav {
     text-align: center;
     transition: background 0.2s;
     display: block;
-    width: 100%;              /* <--- FIXED: All tabs take full width of parent */
+    width: 100%;
     white-space: normal;
-    box-sizing: border-box;   /* <--- Ensures padding/border included in width */
+    box-sizing: border-box;
   }
   .tab.current {
     background: var(--tab-hover);
