@@ -1,21 +1,23 @@
-<header>
+  <header>
   <h1><a href="index.html">Ethics-by-Design Toolbox for Synthetic Biology</a></h1>
 </header>
 
-<nav>
-    <div class="dropdown">
-      <a class="tab" href="index.html">🏠&nbsp;Home</a>
-    </div>
-  
-    <div class="dropdown">
-      <a class="tab" href="#">Ethics-by-Design Toolbox</a>
-      <div class="dropdown-content">
-        <a href="intro.html">Introduction to the Toolbox</a>
-        <a href="sop.html">SOP for Ethics-Science Integration</a>
-      </div>
-    </div>
+<nav class="collapsed" id="responsiveNav">
+  <button class="nav-toggle" onclick="toggleNav()">☰ Menu</button>
 
-    <div class="dropdown">
+  <div class="dropdown">
+    <a class="tab" href="index.html">🏠&nbsp;Home</a>
+  </div>
+
+  <div class="dropdown">
+    <a class="tab" href="#">Ethics-by-Design Toolbox</a>
+    <div class="dropdown-content">
+      <a href="intro.html">Introduction to the Toolbox</a>
+      <a href="sop.html">SOP for Ethics-Science Integration</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
       <a class="tab" href="#">Ethics Framework</a>
       <div class="dropdown-content">
         <a href="ethics-video.html">Introduction to Ethics</a>
@@ -58,5 +60,12 @@
     <div class="dropdown">
       <a class="tab" href="partner.html">Partner with Us</a>
     </div>
-    
-  </nav>
+</nav>
+
+<script>
+  function toggleNav() {
+    const nav = document.getElementById("responsiveNav");
+    nav.classList.toggle("expanded");
+    nav.classList.toggle("collapsed");
+  }
+</script>
