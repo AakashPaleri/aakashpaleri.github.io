@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+  // Get the hamburger button, nav container, and nav drawer
   const hamburger = document.getElementById('hamburger');
   const nav = document.getElementById('responsiveNav');
   const navDrawer = document.querySelector('.nav-drawer');
