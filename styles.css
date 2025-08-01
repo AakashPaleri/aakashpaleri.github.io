@@ -5,7 +5,7 @@
   --tab-bg: #ffffff;
   --tab-hover: #e0f0e9;
   --tab-text: #1b365f;
-  --nav-drawer-bg: #203258;  /* HIGHLIGHTED: deep blue for overlay */
+  --nav-drawer-bg: #203258;
 }
 
 body {
@@ -20,11 +20,17 @@ header {
   text-align: center;
   z-index: 1001;
   position: relative;
+  width: 100%;
+  max-width: 100vw;
+  /* HIGHLIGHTED: Responsive padding for small screens */
+  transition: padding-left 0.2s;
 }
 header h1 {
   margin: 0;
   color: white;
-  font-size: 2rem;
+  font-size: clamp(1.2rem, 5vw, 2rem); /* HIGHLIGHTED: Fluid font size */
+  line-height: 1.2;
+  word-break: break-word;
 }
 
 header a {
@@ -35,6 +41,33 @@ header a {
 }
 header a:hover { transform: scale(1.02); }
 
+/* HIGHLIGHTED: Hamburger outside nav, always visible/clickable, left-aligned */
+.nav-toggle {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 16px;              /* HIGHLIGHTED: left side! */
+  z-index: 100000;
+  border: none;
+  background: var(--nav-bg);
+  color: white;
+  font-weight: bold;
+  font-size: 1.15rem;
+  border-radius: 7px;
+  padding: 12px 18px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.09);
+  pointer-events: auto;    /* HIGHLIGHTED: always clickable */
+}
+@media (max-width: 980px) {
+  .nav-toggle { display: block; }
+  header { padding-left: 70px; } /* HIGHLIGHTED: shift header so never overlapped */
+}
+@media (max-width: 480px) {
+  header { padding-left: 55px; }
+}
+
+/* -------- Desktop nav -------- */
 nav {
   background-color: var(--nav-bg);
   display: flex;
@@ -88,10 +121,6 @@ nav {
   box-shadow: inset 0 -3px 0 var(--header-bg);
 }
 
-.nav-toggle {
-  display: none;
-}
-
 .dropdown-content {
   display: none;
   position: absolute;
@@ -99,9 +128,9 @@ nav {
   left: 0;
   background-color: white;
   min-width: 200px;
-  box-shadow: 0 8px 24px 0 rgba(0,0,0,0.14); /* HIGHLIGHTED: more shadow */
+  box-shadow: 0 8px 24px 0 rgba(0,0,0,0.14);
   border-radius: 0 0 10px 10px;
-  z-index: 99999 !important;  /* HIGHLIGHTED: always above page content */
+  z-index: 99999 !important;
   margin-top: 0.2rem;
 }
 
@@ -126,10 +155,10 @@ main {
   z-index: 1;
 }
 
-/* ======== HAMBURGER OVERLAY MOBILE NAV (Shearings.com style) ======== */
+/* -------- Shearings.com-style Hamburger Overlay Mobile Nav -------- */
 @media (max-width: 980px) {
   nav {
-    position: fixed !important;         /* HIGHLIGHTED: overlay on top */
+    position: fixed !important;
     left: 0;
     top: 0;
     height: 100vh;
@@ -137,24 +166,33 @@ main {
     max-width: 100vw !important;
     margin: 0 !important;
     border-radius: 0 !important;
-    background: transparent !important; /* HIGHLIGHTED: overlay bg is below */
+    background: transparent !important;
     box-shadow: none !important;
     z-index: 99999 !important;
     display: block;
     padding: 0;
-    pointer-events: none;               /* HIGHLIGHTED: disables pointer if closed */
+    pointer-events: none;
   }
   nav.expanded {
-    pointer-events: auto;               /* HIGHLIGHTED: pointer enabled when open */
+    pointer-events: auto;
+  }
+  /* HIGHLIGHTED: pointer-events only for drawer and toggle when collapsed */
+  nav.collapsed {
+    pointer-events: none;
+  }
+  nav.collapsed .nav-toggle {
+    pointer-events: auto;
+  }
+  nav.collapsed .nav-drawer {
+    pointer-events: none;
   }
 
-  /* The semi-transparent dark background overlay */
   nav::before {
     content: "";
     display: block;
     position: fixed;
     inset: 0;
-    background: rgba(20, 28, 46, 0.85); /* HIGHLIGHTED: overlay effect */
+    background: rgba(20, 28, 46, 0.85);
     z-index: 99998;
     opacity: 0;
     pointer-events: none;
@@ -165,29 +203,7 @@ main {
     pointer-events: auto;
   }
 
-  .nav-toggle {
-    display: block;
-    position: fixed;
-    top: 15px;
-    right: 16px;
-    z-index: 100000;    /* HIGHLIGHTED: Always above nav */
-    border: none;
-    background: var(--nav-bg);
-    color: white;
-    font-weight: bold;
-    font-size: 1.15rem;
-    border-radius: 7px;
-    padding: 12px 18px;
-    cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.09);
-  }
-  nav.expanded .nav-toggle {
-    background: #fff;
-    color: var(--nav-bg);
-    border: 1px solid #ccc;
-  }
-
-  /* The drawer panel itself */
+  /* --- Nav Drawer (the actual menu) --- */
   nav .nav-drawer {
     display: flex;
     flex-direction: column;
@@ -195,22 +211,22 @@ main {
     position: fixed;
     top: 0;
     right: 0;
-    width: 100vw;         /* HIGHLIGHTED: Full width of viewport */
-    max-width: 100vw;     /* HIGHLIGHTED: Full width always */
+    width: 100vw;
+    max-width: 100vw;
     height: 100vh;
     background: var(--nav-drawer-bg);
     box-shadow: -2px 0 32px rgba(0,0,0,0.16);
     z-index: 99999;
     transform: translateX(100%);
     transition: transform 0.32s cubic-bezier(.52,.01,.5,1.02);
-    padding-top: 60px; /* space for toggle button */
+    padding-top: 60px;
     pointer-events: auto;
   }
   nav.expanded .nav-drawer {
     transform: translateX(0%);
+    pointer-events: auto;
   }
 
-  /* Hide main nav bar links when not in the drawer */
   nav .dropdown,
   nav .tab {
     display: none !important;
@@ -220,12 +236,11 @@ main {
     display: block !important;
   }
 
-  /* The links inside the drawer */
   nav .nav-drawer .tab {
     background: #fff;
     color: var(--tab-text);
     border-radius: 7px;
-    margin: 0.7rem 30px 0.7rem 30px;     /* HIGHLIGHTED: 30px from edges as requested */
+    margin: 0.7rem 30px 0.7rem 30px;
     width: auto;
     font-size: 1.15rem;
     font-weight: 600;
@@ -249,7 +264,7 @@ main {
     box-shadow: none;
     border-radius: 10px;
     background: #f5f8f9;
-    margin: 0.2rem 30px 0.2rem 30px;  /* HIGHLIGHTED: 30px from edges as requested */
+    margin: 0.2rem 30px 0.2rem 30px;
     width: auto;
     left: 0;
     display: none;
