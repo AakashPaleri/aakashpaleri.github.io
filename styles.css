@@ -28,6 +28,8 @@ header {
   background-color: var(--header-bg);
   padding: 1rem 0;
   text-align: center;
+  z-index: 2; /* HIGHLIGHTED */
+  position: relative;
 }
 
 header h1 {
@@ -36,19 +38,18 @@ header h1 {
   font-size: 2rem;
 }
 
-/* --- NAVIGATION BAR --- */
 nav {
   background-color: var(--nav-bg);
   display: flex;
   justify-content: center;
-  flex-wrap: nowrap;      /* FORCE single row, never wrap */
+  flex-wrap: nowrap;
   padding: 0.5rem;
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 10;  /* HIGHLIGHTED: higher than main */
   transition: all 0.3s ease-in-out;
-  overflow: hidden;       /* Hide overflow, don't scroll */
-  min-width: 0;           /* Allow tabs to shrink below content */
+  overflow: hidden;
+  min-width: 0;
   white-space: nowrap;
 }
 
@@ -66,10 +67,10 @@ nav {
   display: inline-block;
   font-weight: bold;
   transition: background-color 0.3s;
-  flex: 1 1 0;                /* Allow tabs to shrink/grow equally */
-  min-width: 0;               /* Allow tab to shrink as much as needed */
+  flex: 1 1 0;
+  min-width: 0;
   max-width: 180px;
-  font-size: clamp(0.6rem, 1vw, 1rem); /* Responsive shrinking font */
+  font-size: clamp(0.6rem, 1vw, 1rem);
   margin: 0 5px;
   text-align: center;
   white-space: nowrap;
@@ -101,9 +102,10 @@ nav {
   left: 0;
   background-color: white;
   min-width: 200px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.12); /* HIGHLIGHTED: more shadow */
   border-radius: 0 0 10px 10px;
-  z-index: 9999 !important;   /* Always on top */
+  z-index: 99999 !important;   /* HIGHLIGHTED: super high */
+  margin-top: 0.2rem;
 }
 
 .dropdown-content a {
@@ -125,19 +127,25 @@ main {
   padding: 2rem;
   max-width: 800px;
   margin: auto;
+  position: relative; /* HIGHLIGHTED: ensure it doesn't have z-index */
+  z-index: 1;
 }
 
-/* --- Responsive behavior below 980px --- */
 @media (max-width: 980px) {
   nav {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;           /* HIGHLIGHTED: center in mobile */
     flex-wrap: nowrap;
     overflow: visible;
     white-space: normal;
-    padding-left: 0;           /* Even out left/right */
+    padding-left: 0;
     padding-right: 0;
     width: 100vw;
+    max-width: 410px;              /* HIGHLIGHTED: match typical mobile width */
+    margin: 0 auto;                /* HIGHLIGHTED: center horizontally */
+    border-radius: 0 0 24px 24px;  /* HIGHLIGHTED: optional drawer look */
+    box-shadow: 0 6px 32px rgba(0,0,0,0.14); /* HIGHLIGHTED: floating effect */
+    background: var(--nav-bg);
   }
 
   .nav-toggle {
@@ -150,14 +158,31 @@ main {
     cursor: pointer;
     width: 100%;
     text-align: left;
+    border-radius: 0;              /* HIGHLIGHTED: square edges */
+    margin: 0 auto 8px auto;
   }
 
   .dropdown, .tab {
     box-sizing: border-box;
-    padding-left: 16px !important;   /* Even out left/right */
-    padding-right: 16px !important;
-    width: 100%;
+    padding-left: 0 !important;    /* HIGHLIGHTED: flush sides */
+    padding-right: 0 !important;
+    width: 92%;                    /* HIGHLIGHTED: some margin, not full width */
+    margin: 0.5rem 0;              /* HIGHLIGHTED: vertical spacing */
     min-width: unset;
+    border-radius: 8px;            /* HIGHLIGHTED: slightly rounded for mobile */
+    background: none;
+  }
+
+  .tab {
+    border-radius: 8px !important; /* HIGHLIGHTED: rectangular, not pill */
+    background: #fff;
+    color: var(--tab-text);
+    margin: 0 auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* HIGHLIGHTED: soft shadow */
+    font-size: 1.04rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border: none;
   }
 
   nav.collapsed .dropdown {
@@ -176,6 +201,22 @@ main {
 
   .dropdown-content {
     position: static;
-    z-index: 9999 !important;
+    z-index: 99999 !important;
+    box-shadow: none;
+    border-radius: 8px;
+    background: #f5f8f9;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.4rem;
+  }
+  .dropdown-content a {
+    background: none;
+    padding: 14px 18px;
+    margin: 0;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+  .dropdown-content a:hover {
+    background: #e0f0e9;
   }
 }
