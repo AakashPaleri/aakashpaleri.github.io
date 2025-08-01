@@ -150,15 +150,20 @@ nav {
   nav, .nav-drawer {
     display: flex;
     flex-wrap: nowrap !important;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: stretch;
     width: 100vw;
     padding: 0.2rem 0 0 0;
+    overflow-x: auto !important;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox hide */
   }
+  nav::-webkit-scrollbar, .nav-drawer::-webkit-scrollbar { display: none; }
   .tab, .dropdown {
-    flex: 1 1 0;
-    min-width: 0;
-    max-width: none;
+    flex: 0 0 auto;
+    min-width: 110px;
+    max-width: 220px;
   }
   .tab {
     font-size: 0.93rem;
