@@ -16,15 +16,15 @@ body {
 
 .site-content {
   max-width: 1000px;
-  margin: 40px auto 0 auto; 
+  margin: 0 auto;                 /* <== TOP margin is now 0! */
   background: #fff;
   border-radius: 2rem;
   padding: 2.5rem 2.5rem 3.5rem 2.5rem;
 }
 
 .custom-spacing {
-    line-height: 2.5; /* Sets line height to 2.5 times the font size */
-  }
+    line-height: 2.5;
+}
 
 @media (max-width: 1000px) {
   .site-content {
@@ -39,7 +39,7 @@ header {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 18px 0 18px 0; /* more space top/bottom */
+  padding: 18px 0 18px 0;
   z-index: 1001;
   position: relative;
   width: 100%;
@@ -106,7 +106,7 @@ nav {
   display: flex;
   justify-content: center;
   flex-wrap: nowrap;
-  padding: 0.5rem 0.5rem 0 0.5rem;   /* Only top and side paddings */
+  padding: 0.5rem 0.5rem 0 0.5rem;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -116,9 +116,11 @@ nav {
   white-space: nowrap;
   width: 100%;
   left: 0;
-  margin: 0;                        /* <== Add this line (removes bottom gap) */
-  margin-bottom: 0; /* <== Add this! */
-  border-bottom: none; 
+  margin: 0 !important;           /* <== Remove any margins */
+  margin-bottom: 0 !important;
+  border-bottom: none !important;
+  border-radius: 0 !important;
+  padding-bottom: 0 !important;
 }
 .nav-drawer {
   display: flex;
@@ -132,7 +134,7 @@ nav {
 .tab {
   background-color: var(--tab-bg);
   color: var(--tab-text);
-  padding: 10px 28px;      /* More side padding for big text */
+  padding: 10px 28px;
   border-radius: 18px 18px 0 0;
   text-decoration: none;
   display: inline-block;
@@ -141,7 +143,7 @@ nav {
   font-size: clamp(0.6rem, 1vw, 1rem);
   margin: 0 0.5vw;
   text-align: center;
-  white-space: nowrap;     /* If you want all tabs on one line, keep this. */
+  white-space: nowrap;
 }
 .tab:first-child {
   margin-left: 0;
@@ -199,10 +201,10 @@ nav {
     border-radius: 0 0 18px 18px;
     width: 100%;
     box-shadow: 0 8px 24px 0 rgba(0,0,0,0.11);
-    padding: 0;                    /* <== Remove any padding */
+    padding: 0;
     z-index: 1000;
     left: 0;
-    margin: 0;                     /* <== Set margin to 0 */
+    margin: 0 !important;
   }
   nav.expanded {
     display: block !important;
