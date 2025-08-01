@@ -149,7 +149,6 @@ nav {
     display: flex;
     flex-wrap: nowrap !important;
     justify-content: flex-start;
-    justify-content: center;
     align-items: stretch;
     width: 100vw;
     padding: 0.2rem 0 0 0;
