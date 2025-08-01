@@ -103,6 +103,7 @@ nav {
   color: var(--tab-text);
   padding: 10px 28px;
   border-radius: 8px;
+  max-height: 33px;
   text-decoration: none;
   display: inline-block;
   font-weight: bold;
@@ -178,6 +179,7 @@ nav {
     text-overflow: ellipsis;
     overflow: hidden;
     border-radius: 8px;
+    max-height: 33px;
     box-sizing: border-box;
   }
   .dropdown {
