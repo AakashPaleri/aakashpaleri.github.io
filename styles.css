@@ -71,7 +71,7 @@ nav {
   display: flex;
   justify-content: center;
   flex-wrap: nowrap;
-  padding: 0.5rem 0 0 0;
+  padding: 0.5rem 0.75vw 0 0.75vw;  /* Add horizontal padding! */
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -106,12 +106,10 @@ nav {
   font-weight: bold;
   transition: background-color 0.3s;
   font-size: clamp(0.6rem, 1vw, 1rem);
-  margin: 0 0.5vw;
+  margin: 0 0.5vw;   /* Apply same margin left/right to ALL tabs */
   text-align: center;
   white-space: nowrap;
 }
-.tab:first-child { margin-left: 0; }
-.tab:last-child { margin-right: 0; }
 .tab:hover { background-color: var(--tab-hover); }
 .tab:focus {
   outline: 2px solid var(--header-bg);
