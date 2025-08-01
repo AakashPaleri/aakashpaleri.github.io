@@ -2,7 +2,6 @@
 <!-- Main NAV HEADER (includes the hamburger and site title) -->
 <header>
   <button class="nav-toggle" id="hamburger" aria-label="Open menu" aria-expanded="false">
-    <!-- This span for a custom icon if desired -->
     <span class="hamburger-icon">☰</span> Menu
   </button>
   <h1 class="nav-header-title">
@@ -62,11 +61,14 @@
     </div>
   </div>
 </nav>
+
 <!-- 
-HIGHLIGHTS:
-- Hamburger button has id="hamburger" (for JS)
-- Nav bar has id="responsiveNav" (for JS)
-- nav-drawer exists in the markup (not injected by JS)
-- All dropdowns and links are intact
-- You can add a custom SVG icon in <span class="hamburger-icon"></span> if you like
+IMPORTANT:  
+Below this point, your page content should be wrapped in:
+<main class="site-content"> ... </main>
+Example:
+<main class="site-content">
+  <h2>Welcome!</h2>
+  <p>All your content here...</p>
+</main>
 -->
