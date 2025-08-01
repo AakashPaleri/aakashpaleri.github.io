@@ -133,6 +133,7 @@ nav {
   left: 0;
   background-color: white;
   min-width: 200px;
+  box-shadow: 0 8px 24px 0 rgba(0,0,0,0.14);
   border-radius: 0 0 10px 10px;
   z-index: 99999 !important;
   margin-top: 0.2rem;
