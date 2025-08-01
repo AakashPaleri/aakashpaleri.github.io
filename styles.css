@@ -163,6 +163,7 @@ nav {
     overflow-y: visible;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none; /* Firefox hide */
+    border-bottom: 2px solid #1b365f;
   }
   nav::-webkit-scrollbar, .nav-drawer::-webkit-scrollbar { display: none; }
   .tab, .dropdown {
