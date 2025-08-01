@@ -2,18 +2,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   const nav = document.getElementById("responsiveNav");
   const hamburger = document.getElementById("hamburger");
+  const drawer = nav.querySelector('.nav-drawer'); // HIGHLIGHTED: Use existing nav-drawer
 
-  // --- Drawer: create nav drawer and move dropdowns into it on mobile
-  let drawer = document.createElement('div');
-  drawer.className = "nav-drawer";
-  Array.from(nav.children).forEach(child => {
-    if (child.classList && child.classList.contains('dropdown')) {
-      drawer.appendChild(child);
-    }
-  });
-  nav.appendChild(drawer);
-
-  // --- HIGHLIGHTED: Collapse menu by default on page load (mobile and desktop)
+  // Collapse menu by default on page load
   function collapseNav() {
     nav.classList.remove("expanded");
     nav.classList.add("collapsed");
@@ -28,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Always start collapsed
   collapseNav();
 
-  // --- Hamburger toggles expanded/collapsed and drawer overlay
+  // Hamburger toggles expanded/collapsed and drawer overlay
   hamburger.addEventListener("click", (e) => {
     e.stopPropagation();
     if (nav.classList.contains("expanded")) {
@@ -45,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- Expand/collapse dropdowns inside the drawer
+  // Expand/collapse dropdowns inside the drawer
   drawer.querySelectorAll(".dropdown > .tab").forEach(tab => {
     tab.addEventListener("click", function(e) {
       let dropdown = this.parentElement;
@@ -57,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- When a link is clicked, close nav and allow scroll again
+  // When a link is clicked, close nav and allow scroll again
   drawer.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", function() {
       if (window.innerWidth <= 980) {
@@ -66,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- Desktop: Highlight current page tab
+  // Desktop: Highlight current page tab
   const links = nav.querySelectorAll(".dropdown-content a, .tab");
   const currentPath = window.location.pathname.split("/").pop();
   links.forEach(link => {
@@ -76,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- Desktop: Dropdowns on hover
+  // Desktop: Dropdowns on hover
   nav.querySelectorAll(".dropdown").forEach(dropdown => {
     dropdown.addEventListener("mouseenter", () => {
       if (window.innerWidth > 980) dropdown.classList.add("expanded");
@@ -86,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- Keyboard accessibility for dropdowns
+  // Keyboard accessibility for dropdowns
   links.forEach(tab => {
     tab.setAttribute("tabindex", "0");
     tab.addEventListener("keydown", (e) => {
@@ -98,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- HIGHLIGHTED: Collapse menu if resizing to desktop view
+  // Collapse menu if resizing to desktop view
   window.addEventListener("resize", () => {
     if (window.innerWidth > 980) {
       collapseNav();
