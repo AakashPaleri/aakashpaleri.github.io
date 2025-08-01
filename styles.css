@@ -85,8 +85,6 @@ nav {
   margin: 0 !important;
   border-radius: 0 !important;
   box-sizing: border-box;
-  /* Add a bottom border for visual separation */
-  border-bottom: 2px solid #1b365f;
 }
 
 .nav-drawer {
@@ -133,7 +131,6 @@ nav {
   left: 0;
   background-color: white;
   min-width: 200px;
-  box-shadow: 0 8px 24px 0 rgba(0,0,0,0.14);
   border-radius: 0 0 10px 10px;
   z-index: 99999 !important;
   margin-top: 0.2rem;
@@ -163,7 +160,6 @@ nav {
     overflow-y: visible;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none; /* Firefox hide */
-    border-bottom: 2px solid #1b365f;
   }
   nav::-webkit-scrollbar, .nav-drawer::-webkit-scrollbar { display: none; }
   .tab, .dropdown {
