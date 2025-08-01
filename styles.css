@@ -97,6 +97,7 @@ header a.nav-title-link:hover {
   pointer-events: auto;
 }
 
+/* --- MOBILE LAYOUT: move menu button below title --- */
 @media (max-width: 980px) {
   header {
     flex-direction: column;
