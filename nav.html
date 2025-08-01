@@ -67,4 +67,54 @@
     nav.classList.toggle("expanded");
     nav.classList.toggle("collapsed");
   }
+   // Auto-collapse menu after link click on mobile
+  document.addEventListener("DOMContentLoaded", () => {
+    const nav = document.getElementById("responsiveNav");
+    const links = nav.querySelectorAll(".dropdown-content a, .tab");
+
+    // Highlight current page tab
+    const currentPath = window.location.pathname.split("/").pop();
+    links.forEach(link => {
+      const href = link.getAttribute("href");
+      if (href === currentPath) {
+        link.classList.add("current");
+      }
+    });
+
+    // Close nav after click on mobile
+    links.forEach(link => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth <= 980) {
+          nav.classList.remove("expanded");
+          nav.classList.add("collapsed");
+        }
+      });
+    });
+  });
 </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropdowns = document.querySelectorAll(".dropdown");
+
+    dropdowns.forEach(dropdown => {
+      const tab = dropdown.querySelector(".tab");
+
+      // Make dropdown headers keyboard-accessible
+      tab.setAttribute("tabindex", "0");
+
+      tab.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          const content = dropdown.querySelector(".dropdown-content");
+
+          if (content) {
+            const isOpen = content.style.display === "block";
+            content.style.display = isOpen ? "none" : "block";
+          }
+        }
+      });
+    });
+  });
+</script>
+
