@@ -31,11 +31,11 @@ header {
   padding: 18px 0 18px 0;
   z-index: 1001;
   position: relative;
-  width: 100vw;    /* <--- FIXED: forces header to full viewport width */
-  left: 0;         /* <--- Make sure it's flush left */
+  width: 100vw;
+  left: 0;
   box-sizing: border-box;
   transition: background 0.5s cubic-bezier(.42,.1,.52,1.02);
-  margin: 0 !important;  /* <--- Remove any accidental margin */
+  margin: 0 !important;
 }
 
 header h1 {
@@ -72,7 +72,6 @@ nav {
   justify-content: center;
   flex-wrap: nowrap;
   padding: 0.5rem 0 0 0;
-  width: 100vw;     /* <--- FIXED: nav always 100vw */
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -80,6 +79,7 @@ nav {
   overflow: visible;
   min-width: 0;
   white-space: nowrap;
+  width: 100vw;
   left: 0;
   margin: 0 !important;
   border-radius: 0 !important;
@@ -145,10 +145,40 @@ nav {
   display: block;
 }
 
+/* ===== TABLET MIDWIDTH: Tabs auto-shrink, no wrap, always in one row ===== */
+@media (max-width: 1110px) and (min-width: 729px) {
+  nav, .nav-drawer {
+    display: flex;
+    flex-wrap: nowrap !important;
+    justify-content: center;
+    align-items: stretch;
+    width: 100vw;
+    padding: 0.2rem 0 0 0;
+  }
+  .tab, .dropdown {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: none;
+  }
+  .tab {
+    font-size: 0.93rem;
+    padding: 8px 8px;
+    margin: 0 0.2vw;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border-radius: 14px 14px 0 0;
+    box-sizing: border-box;
+  }
+  .dropdown {
+    margin: 0 0.2vw;
+  }
+}
+
 /* ===== MOBILE NAVIGATION ===== */
 @media (max-width: 728px) {
   header {
-    width: 100vw;   /* <--- Make sure header fills mobile viewport */
+    width: 100vw;
     left: 0;
   }
   nav {
@@ -156,7 +186,7 @@ nav {
     position: static;
     background: var(--nav-drawer-bg);
     border-radius: 0 0 18px 18px;
-    width: 100vw !important;  /* <--- Forces nav to fill full width */
+    width: 100vw !important;
     box-shadow: 0 8px 24px 0 rgba(0,0,0,0.11);
     padding: 0;
     z-index: 1000;
