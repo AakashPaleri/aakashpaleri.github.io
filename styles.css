@@ -40,12 +40,12 @@ nav {
   background-color: var(--nav-bg);
   display: flex;
   justify-content: center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap; /* ✅ allow tab wrapping */
   padding: 0.5rem;
-  overflow-x: auto;
   position: sticky;
   top: 0;
   z-index: 1000;
+  transition: all 0.3s ease-in-out;
 }
 
 .dropdown {
@@ -68,12 +68,22 @@ nav {
   margin: 0 5px;
 }
 
-.nav-toggle {
-  display: none;
-}
-
 .tab:hover {
   background-color: var(--tab-hover);
+}
+
+.tab:focus {
+  outline: 2px solid var(--header-bg);
+  outline-offset: 2px;
+}
+
+.tab.current {
+  background-color: var(--tab-hover);
+  box-shadow: inset 0 -3px 0 var(--header-bg);
+}
+
+.nav-toggle {
+  display: none;
 }
 
 .dropdown-content {
@@ -108,6 +118,7 @@ main {
   max-width: 800px;
   margin: auto;
 }
+
 /* --- Responsive behavior below 980px --- */
 @media (max-width: 980px) {
   nav {
@@ -129,14 +140,6 @@ main {
     text-align: left;
   }
 
-  nav.collapsed .dropdown {
-    display: none;
-  }
-
-  nav.expanded .dropdown {
-    display: block;
-  }
-
   .dropdown,
   .dropdown-content {
     width: 100%;
@@ -148,8 +151,7 @@ main {
     padding: 12px;
     font-size: 1rem;
   }
-}
-@media (max-width: 980px) {
+
   nav.collapsed .dropdown {
     max-height: 0;
     overflow: hidden;
@@ -157,17 +159,8 @@ main {
   }
 
   nav.expanded .dropdown {
-    display: block;
-    max-height: 300px; /* adjust as needed */
+    max-height: 500px; /* enough space to show items */
+    overflow: visible;
     transition: max-height 0.4s ease-in;
   }
 }
-.tab:focus {
-  outline: 2px solid var(--header-bg);
-  outline-offset: 2px;
-}
-.tab.current {
-  background-color: var(--tab-hover);
-  box-shadow: inset 0 -3px 0 var(--header-bg);
-}
-
