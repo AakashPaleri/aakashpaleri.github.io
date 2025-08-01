@@ -66,21 +66,27 @@ header a.nav-title-link:hover {
   transform: scale(1.05);
 }
 
-nav, .nav-drawer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-end;   /* <-- BOTTOM align all tabs */
-  flex-wrap: nowrap;
-  width: 100vw;
+nav {
   background-color: var(--nav-bg);
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  /* Remove vertical padding! */
   padding: 0;
-  margin: 0 !important;
-  border-bottom: 2px solid #1b365f;
-  box-sizing: border-box;
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 1000;
+  transition: all 0.3s ease-in-out;
+  overflow: visible;
   min-width: 0;
+  white-space: nowrap;
+  width: 100vw;
+  left: 0;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  box-sizing: border-box;
+  /* Add a bottom border for visual separation */
+  border-bottom: 2px solid #1b365f;
 }
 
 .nav-drawer {
@@ -93,22 +99,20 @@ nav, .nav-drawer {
 
 .dropdown { position: relative; margin: 0 0.5rem; }
 .tab {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 56px;   /* Make all tabs the same min height */
-  height: 56px;
   background-color: var(--tab-bg);
   color: var(--tab-text);
-  padding: 0 28px;    /* Only horizontal padding */
+  padding: 10px 28px;
   border-radius: 18px 18px 0 0;
+  text-decoration: none;
+  display: inline-block;
   font-weight: bold;
-  font-size: 1rem;
-  margin: 0 0.5vw 0 0.5vw;
+  transition: background-color 0.3s;
+  font-size: clamp(0.6rem, 1vw, 1rem);
+  margin: 0 0.5vw 0 0.5vw; /* Remove bottom margin */
   text-align: center;
-  box-sizing: border-box;
   white-space: nowrap;
-  transition: background 0.2s;
+  box-sizing: border-box;
+  /* No vertical margin so tabs flush with nav bg */
 }
 .tab:first-child { margin-left: 0; }
 .tab:last-child { margin-right: 0; }
