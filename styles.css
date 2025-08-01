@@ -45,9 +45,7 @@ header {
   box-sizing: border-box;
   transition: background 0.5s cubic-bezier(.42,.1,.52,1.02);
 }
-header:hover {
-  background: linear-gradient(90deg, #1b365f 80%, #3ad29f 150%);
-}
+
 header h1 {
   margin: 0;
   color: white;
