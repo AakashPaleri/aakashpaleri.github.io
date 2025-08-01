@@ -221,13 +221,13 @@ nav {
     background: #fff;
     color: var(--tab-text);
     border-radius: 7px;
-    margin: 0.7rem 14px 0.7rem 14px;
+    margin: 0.0 14px 0.0 14px;
     font-size: 1.11rem;
     font-weight: 600;
     letter-spacing: 0.02em;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     border: none;
-    padding: 15px 0;
+    padding: 0;
     text-align: center;
     transition: background 0.2s;
     display: block;
