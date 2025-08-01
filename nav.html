@@ -3,12 +3,10 @@
 </header>
 
 <nav class="collapsed" id="responsiveNav">
-  <button class="nav-toggle" onclick="toggleNav()">☰ Menu</button>
-
+  <button class="nav-toggle" id="hamburger">☰ Menu</button> <!-- HIGHLIGHTED: id added for JS -->
   <div class="dropdown">
     <a class="tab" href="index.html">🏠&nbsp;Home</a>
   </div>
-
   <div class="dropdown">
     <a class="tab" href="#">Ethics-by-Design Toolbox</a>
     <div class="dropdown-content">
@@ -16,7 +14,6 @@
       <a href="sop.html">SOP for Ethics-Science Integration</a>
     </div>
   </div>
-
   <div class="dropdown">
     <a class="tab" href="#">Ethics Framework</a>
     <div class="dropdown-content">
@@ -25,7 +22,6 @@
       <a href="stakeholders.html">Relationship with Stakeholders</a>
     </div>
   </div>
-
   <div class="dropdown">
     <a class="tab" href="#">Case Studies</a>
     <div class="dropdown-content">
@@ -36,14 +32,12 @@
       <a href="heatresistant.html">Engineered Heat-Resistant Coral</a>
     </div>
   </div>
-
   <div class="dropdown">
     <a class="tab" href="#">Ethics Exercise</a>
     <div class="dropdown-content">
       <a href="questionnaire.html">Self-Analysis Questionnaire</a>
     </div>
   </div>
-
   <div class="dropdown">
     <a class="tab" href="#">Green Lab</a>
     <div class="dropdown-content">
@@ -51,28 +45,28 @@
       <a href="suggestions.html">Suggestions (open to users)</a>
     </div>
   </div>
-
   <div class="dropdown">
     <a class="tab" href="contact.html">Contact Us</a>
   </div>
-
   <div class="dropdown">
     <a class="tab" href="partner.html">Partner with Us</a>
   </div>
 </nav>
 
 <script>
-  function toggleNav() {
+  // HIGHLIGHTED: Re-attach toggle logic after fetch
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleButton = document.getElementById("hamburger");
     const nav = document.getElementById("responsiveNav");
-    nav.classList.toggle("expanded");
-    nav.classList.toggle("collapsed");
-  }
-   // Auto-collapse menu after link click on mobile
-  document.addEventListener("DOMContentLoaded", () => {
-    const nav = document.getElementById("responsiveNav");
-    const links = nav.querySelectorAll(".dropdown-content a, .tab");
+    if (toggleButton && nav) {
+      toggleButton.addEventListener("click", () => {
+        nav.classList.toggle("expanded");
+        nav.classList.toggle("collapsed");
+      });
+    }
 
-    // Highlight current page tab
+    // Highlight current page tab (auto by URL)
+    const links = nav.querySelectorAll(".dropdown-content a, .tab");
     const currentPath = window.location.pathname.split("/").pop();
     links.forEach(link => {
       const href = link.getAttribute("href");
@@ -90,31 +84,25 @@
         }
       });
     });
-  });
-</script>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const dropdowns = document.querySelectorAll(".dropdown");
-
+    // Keyboard accessibility for dropdowns
+    const dropdowns = nav.querySelectorAll(".dropdown");
     dropdowns.forEach(dropdown => {
       const tab = dropdown.querySelector(".tab");
-
-      // Make dropdown headers keyboard-accessible
-      tab.setAttribute("tabindex", "0");
-
-      tab.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          const content = dropdown.querySelector(".dropdown-content");
-
-          if (content) {
-            const isOpen = content.style.display === "block";
-            content.style.display = isOpen ? "none" : "block";
+      if (tab) {
+        tab.setAttribute("tabindex", "0");
+        tab.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            const content = dropdown.querySelector(".dropdown-content");
+            if (content) {
+              // For desktop, toggle dropdown display
+              const isOpen = content.style.display === "block";
+              content.style.display = isOpen ? "none" : "block";
+            }
           }
-        }
-      });
+        });
+      }
     });
   });
 </script>
-

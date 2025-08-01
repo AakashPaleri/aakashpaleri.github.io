@@ -36,16 +36,19 @@ header h1 {
   font-size: 2rem;
 }
 
+/* HIGHLIGHTED: allow horizontal scroll + shrink/wrap for nav */
 nav {
   background-color: var(--nav-bg);
   display: flex;
   justify-content: center;
-  flex-wrap: wrap; /* ✅ allow tab wrapping */
+  flex-wrap: wrap;           /* HIGHLIGHTED */
   padding: 0.5rem;
   position: sticky;
   top: 0;
   z-index: 1000;
   transition: all 0.3s ease-in-out;
+  overflow-x: auto;          /* HIGHLIGHTED */
+  white-space: nowrap;       /* HIGHLIGHTED */
 }
 
 .dropdown {
@@ -53,6 +56,7 @@ nav {
   margin: 0 0.5rem;
 }
 
+/* HIGHLIGHTED: responsive font size and shrink for tabs */
 .tab {
   background-color: var(--tab-bg);
   color: var(--tab-text);
@@ -62,10 +66,11 @@ nav {
   display: inline-block;
   font-weight: bold;
   transition: background-color 0.3s;
-  flex-shrink: 1;
-  white-space: nowrap;
-  font-size: 1rem;
+  flex-shrink: 1;                   /* HIGHLIGHTED */
+  min-width: 80px;                  /* HIGHLIGHTED */
+  font-size: clamp(0.8rem, 2vw, 1rem); /* HIGHLIGHTED */
   margin: 0 5px;
+  white-space: nowrap;
 }
 
 .tab:hover {
@@ -126,6 +131,7 @@ main {
     align-items: flex-start;
     flex-wrap: nowrap;
     overflow: visible;
+    white-space: normal;    /* HIGHLIGHTED: allow multi-line on mobile */
   }
 
   .nav-toggle {
@@ -150,17 +156,24 @@ main {
     border-radius: 0;
     padding: 12px;
     font-size: 1rem;
+    min-width: unset;      /* HIGHLIGHTED: remove min-width on mobile */
   }
 
   nav.collapsed .dropdown {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease-out;
+    transition: max-height 0.4s cubic-bezier(.36,.66,.04,1); /* HIGHLIGHTED: smooth animation */
+    display: block;       /* HIGHLIGHTED: necessary for max-height animation */
   }
 
   nav.expanded .dropdown {
-    max-height: 500px; /* enough space to show items */
+    max-height: 500px;    /* HIGHLIGHTED: big enough for menu */
     overflow: visible;
-    transition: max-height 0.4s ease-in;
+    transition: max-height 0.4s cubic-bezier(.36,.66,.04,1);
+    display: block;       /* HIGHLIGHTED */
+  }
+
+  .dropdown-content {
+    position: static;
   }
 }
