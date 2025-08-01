@@ -41,13 +41,14 @@ nav {
   background-color: var(--nav-bg);
   display: flex;
   justify-content: center;
-  flex-wrap: nowrap;     /* HIGHLIGHTED: force one row, never wrap */
+  flex-wrap: nowrap;      /* FORCE single row, never wrap */
   padding: 0.5rem;
   position: sticky;
   top: 0;
   z-index: 1000;
   transition: all 0.3s ease-in-out;
-  /* Removed overflow-x: auto to avoid scrolling */
+  overflow: hidden;       /* Hide overflow, don't scroll */
+  min-width: 0;           /* Allow tabs to shrink below content */
   white-space: nowrap;
 }
 
@@ -65,13 +66,14 @@ nav {
   display: inline-block;
   font-weight: bold;
   transition: background-color 0.3s;
-  flex: 1 1 0;                /* HIGHLIGHTED: allow shrinking/growing equally */
-  min-width: 60px;            /* HIGHLIGHTED: allow to get pretty small */
-  max-width: 180px;           /* HIGHLIGHTED: don't get too wide */
-  font-size: clamp(0.65rem, 1.1vw, 1rem); /* HIGHLIGHTED: shrink text as needed */
+  flex: 1 1 0;                /* Allow tabs to shrink/grow equally */
+  min-width: 0;               /* Allow tab to shrink as much as needed */
+  max-width: 180px;
+  font-size: clamp(0.6rem, 1vw, 1rem); /* Responsive shrinking font */
   margin: 0 5px;
   text-align: center;
   white-space: nowrap;
+  overflow: hidden;
 }
 
 .tab:hover {
@@ -101,7 +103,7 @@ nav {
   min-width: 200px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   border-radius: 0 0 10px 10px;
-  z-index: 1001;
+  z-index: 9999 !important;   /* Always on top */
 }
 
 .dropdown-content a {
@@ -125,7 +127,7 @@ main {
   margin: auto;
 }
 
-/* --- Responsive: below 980px switches to hamburger --- */
+/* --- Responsive behavior below 980px --- */
 @media (max-width: 980px) {
   nav {
     flex-direction: column;
@@ -133,6 +135,9 @@ main {
     flex-wrap: nowrap;
     overflow: visible;
     white-space: normal;
+    padding-left: 0;           /* Even out left/right */
+    padding-right: 0;
+    width: 100vw;
   }
 
   .nav-toggle {
@@ -147,16 +152,11 @@ main {
     text-align: left;
   }
 
-  .dropdown,
-  .dropdown-content {
+  .dropdown, .tab {
+    box-sizing: border-box;
+    padding-left: 16px !important;   /* Even out left/right */
+    padding-right: 16px !important;
     width: 100%;
-  }
-
-  .tab {
-    width: 100%;
-    border-radius: 0;
-    padding: 12px;
-    font-size: 1rem;
     min-width: unset;
   }
 
@@ -176,5 +176,6 @@ main {
 
   .dropdown-content {
     position: static;
+    z-index: 9999 !important;
   }
 }
