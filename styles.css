@@ -223,8 +223,9 @@ nav {
     text-align: center;
     transition: background 0.2s;
     display: block;
-    width: auto;
+    width: 100%;              /* <--- FIXED: All tabs take full width of parent */
     white-space: normal;
+    box-sizing: border-box;   /* <--- Ensures padding/border included in width */
   }
   .tab.current {
     background: var(--tab-hover);
