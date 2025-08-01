@@ -36,7 +36,7 @@ header {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 0 0.75rem;
+  padding: 10px 0 10px 0; /* top right bottom left */
   height: 62px;
   z-index: 1001;
   position: relative;
@@ -103,6 +103,8 @@ header a.nav-title-link:hover {
   .nav-toggle {
     display: block;
     margin: 0;
+    padding: 10px 0 10px 0;
+    font-size: 1.2rem; 
     /* always below the header */
   }
 }
