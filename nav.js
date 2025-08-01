@@ -1,42 +1,47 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Detect mobile (breakpoint)
+  // Utility: Are we in mobile mode?
   function isMobile() {
     return window.innerWidth <= 728;
   }
 
-  // Mobile dropdown toggle logic: open/close on repeated taps
+  function closeAllDropdowns() {
+    document.querySelectorAll('.dropdown.expanded').forEach(dd => dd.classList.remove('expanded'));
+  }
+
   function setupMobileDropdowns() {
-    const dropdowns = document.querySelectorAll('.dropdown');
-    const tabs = document.querySelectorAll('.dropdown-toggle');
+    // Remove all previous click listeners (by cloning)
+    const navDrawer = document.querySelector('.nav-drawer');
+    if (!navDrawer) return;
+    const cleanNavDrawer = navDrawer.cloneNode(true);
+    navDrawer.parentNode.replaceChild(cleanNavDrawer, navDrawer);
 
-    // Remove all click handlers before re-adding (prevents duplicates)
-    tabs.forEach(tab => {
-      tab.onclick = null;
-    });
-
+    // Only set up listeners on mobile
     if (isMobile()) {
-      tabs.forEach(tab => {
-        tab.onclick = function(e) {
-          e.preventDefault();
-          const parent = this.parentElement;
-          // If already open, close it. If closed, open and close others.
-          if (parent.classList.contains('expanded')) {
-            parent.classList.remove('expanded');
-          } else {
-            dropdowns.forEach(d => {
-              d.classList.remove('expanded');
-            });
-            parent.classList.add('expanded');
+      cleanNavDrawer.querySelectorAll('.dropdown').forEach(dropdown => {
+        const tab = dropdown.querySelector('.tab');
+        const dropdownContent = dropdown.querySelector('.dropdown-content');
+        if (!tab) return;
+        tab.addEventListener('click', function(e) {
+          // Only toggle for tabs with a dropdown-content
+          if (dropdownContent) {
+            e.preventDefault();
+            // Toggle open/close
+            if (dropdown.classList.contains('expanded')) {
+              dropdown.classList.remove('expanded');
+            } else {
+              closeAllDropdowns();
+              dropdown.classList.add('expanded');
+            }
           }
-        };
+          // If no dropdown-content, do nothing—let link work as normal
+        });
       });
     } else {
-      // Remove expanded from all on desktop, and all click handlers
-      dropdowns.forEach(d => d.classList.remove('expanded'));
+      closeAllDropdowns();
     }
   }
 
-  // Highlight current tab based on URL (if you had this, it's preserved)
+  // Optional: highlight current tab based on URL
   function highlightCurrentTab() {
     const currentPage = window.location.pathname.split('/').pop();
     document.querySelectorAll('.tab').forEach(tab => {
@@ -52,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
   setupMobileDropdowns();
   highlightCurrentTab();
 
-  // Rerun on resize (for responsiveness)
+  // Rerun on resize for responsiveness
   window.addEventListener('resize', function() {
     setupMobileDropdowns();
     highlightCurrentTab();
