@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Partner with Us</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body> <!-- Paste the same header and nav here from index.html -->
+ 
+<div id="nav-placeholder"></div>
+
+<script>
+  fetch('nav.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('nav-placeholder').innerHTML = html;
+      // Now load nav.js only after nav is injected!
+      var script = document.createElement('script');
+      script.src = 'nav.js';
+      document.body.appendChild(script);
+    });
+</script>
+  <main class="site-content">
+    <p>This section introduces foundational concepts in the application of ethics within scientific research. It provides an overview of key ethical principles and highlights critical considerations necessary for integrating ethical reflection into research practices. Additionally, the section explores the roles and responsibilities of various stakeholders involved in the research process, offering a broader understanding of how ethical engagement can be meaningfully situated within scientific contexts.</p>
+  </main>
+</body>
+</html>
+    

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Partner with Us</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body> <!-- Paste the same header and nav here from index.html -->
+ 
+<div id="nav-placeholder"></div>
+
+<script>
+  fetch('nav.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('nav-placeholder').innerHTML = html;
+      // Now load nav.js only after nav is injected!
+      var script = document.createElement('script');
+      script.src = 'nav.js';
+      document.body.appendChild(script);
+    });
+</script>
+  <main class="site-content">
+    <p>This section provides practical tools to support researchers in embedding ethical reflection into their scientific practice and in developing a research design informed by ethical considerations. It includes a self-analysis questionnaire to guide ethical deliberation and a set of recommendations for fostering sustainable and responsible laboratory practises.</p>
+  </main>
+</body>
+</html>
+    
