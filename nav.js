@@ -1,65 +1,53 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Utility: Are we in mobile mode?
-  function isMobile() {
-    return window.innerWidth <= 728;
+  const cta = document.getElementById('navMobileCTA');
+  const nav = document.getElementById('responsiveNav');
+
+  if (!cta || !nav) return;
+
+  // Always start collapsed on mobile
+  nav.classList.remove('expanded');
+  nav.classList.add('collapsed');
+  cta.setAttribute('aria-expanded', 'false');
+
+  function toggleAccordion() {
+    nav.classList.toggle('expanded');
+    nav.classList.toggle('collapsed');
+    cta.setAttribute('aria-expanded', nav.classList.contains('expanded') ? 'true' : 'false');
   }
 
-  function closeAllDropdowns() {
-    document.querySelectorAll('.dropdown.expanded').forEach(dd => dd.classList.remove('expanded'));
-  }
-
-  function setupMobileDropdowns() {
-    // Remove all previous click listeners (by cloning)
-    const navDrawer = document.querySelector('.nav-drawer');
-    if (!navDrawer) return;
-    const cleanNavDrawer = navDrawer.cloneNode(true);
-    navDrawer.parentNode.replaceChild(cleanNavDrawer, navDrawer);
-
-    // Only set up listeners on mobile
-    if (isMobile()) {
-      cleanNavDrawer.querySelectorAll('.dropdown').forEach(dropdown => {
-        const tab = dropdown.querySelector('.tab');
-        const dropdownContent = dropdown.querySelector('.dropdown-content');
-        if (!tab) return;
-        tab.addEventListener('click', function(e) {
-          // Only toggle for tabs with a dropdown-content
-          if (dropdownContent) {
-            e.preventDefault();
-            // Toggle open/close
-            if (dropdown.classList.contains('expanded')) {
-              dropdown.classList.remove('expanded');
-            } else {
-              closeAllDropdowns();
-              dropdown.classList.add('expanded');
-            }
-          }
-          // If no dropdown-content, do nothing—let link work as normal
-        });
-      });
-    } else {
-      closeAllDropdowns();
+  cta.addEventListener('click', function(e) {
+    e.stopPropagation();
+    toggleAccordion();
+  });
+  cta.addEventListener('keydown', function(e) {
+    if (e.key === " " || e.key === "Enter") {
+      e.preventDefault();
+      toggleAccordion();
     }
-  }
+  });
 
-  // Optional: highlight current tab based on URL
-  function highlightCurrentTab() {
-    const currentPage = window.location.pathname.split('/').pop();
-    document.querySelectorAll('.tab').forEach(tab => {
-      tab.classList.remove('current');
-      const href = tab.getAttribute('href');
-      if (href && href === currentPage) {
-        tab.classList.add('current');
-      }
-    });
-  }
-
-  // Initial run
-  setupMobileDropdowns();
-  highlightCurrentTab();
-
-  // Rerun on resize for responsiveness
-  window.addEventListener('resize', function() {
-    setupMobileDropdowns();
-    highlightCurrentTab();
+  // Optional: close nav if click outside (mobile)
+  document.addEventListener('click', function(e) {
+    if (
+      window.innerWidth <= 1110 &&
+      nav.classList.contains('expanded') &&
+      !nav.contains(e.target) &&
+      e.target !== cta
+    ) {
+      nav.classList.remove('expanded');
+      nav.classList.add('collapsed');
+      cta.setAttribute('aria-expanded', 'false');
+    }
+  });
+  // ESC closes accordion
+  document.addEventListener('keydown', function(e) {
+    if (
+      (e.key === "Escape" || e.key === "Esc") &&
+      nav.classList.contains('expanded')
+    ) {
+      nav.classList.remove('expanded');
+      nav.classList.add('collapsed');
+      cta.setAttribute('aria-expanded', 'false');
+    }
   });
 });
