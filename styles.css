@@ -8,12 +8,12 @@
   --nav-drawer-bg: #203258;
 }
 
+/* Center site content */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: var(--bg-main);
 }
-
 .site-content {
   max-width: 900px;
   margin: 2rem auto 0 auto;
@@ -22,7 +22,6 @@ body {
   padding: 2rem 2rem 4rem 2rem;
   box-shadow: 0 4px 32px 0 rgba(0,0,0,0.04);
 }
-
 @media (max-width: 1000px) {
   .site-content {
     max-width: 98vw;
@@ -30,7 +29,7 @@ body {
   }
 }
 
-/* ------------ HEADER & HOVER EFFECT ------------ */
+/* HEADER with hover effect */
 header {
   background-color: var(--header-bg);
   display: flex;
@@ -74,7 +73,7 @@ header a.nav-title-link:hover {
   text-decoration: none;
 }
 
-/* ------------ HAMBURGER: only show on mobile ------------ */
+/* HAMBURGER: only show on mobile */
 .nav-toggle {
   display: none; /* Hide on desktop */
   position: absolute;
@@ -108,7 +107,6 @@ header a.nav-title-link:hover {
     max-width: 100%;
   }
 }
-
 @media (max-width: 580px) {
   header h1 {
     font-size: clamp(0.85rem, 5vw, 1.1rem);
@@ -120,8 +118,7 @@ header a.nav-title-link:hover {
   }
 }
 
-/* --- The rest of your styles remain unchanged --- */
-
+/* NAVBAR (sitewide) */
 nav {
   background-color: var(--nav-bg);
   display: flex;
@@ -168,6 +165,7 @@ nav {
   nav.collapsed {
     pointer-events: none;
   }
+  /* hamburger always clickable on mobile */
   .nav-toggle {
     pointer-events: auto;
     z-index: 100001;
@@ -218,6 +216,7 @@ nav {
   }
 }
 
+/* Dropdown tabs */
 .dropdown { position: relative; margin: 0 0.5rem; }
 .tab {
   background-color: var(--tab-bg);
