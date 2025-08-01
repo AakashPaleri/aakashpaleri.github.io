@@ -1,91 +1,53 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const nav = document.getElementById("responsiveNav");
-  const hamburger = document.getElementById("hamburger");
-  if (!nav || !hamburger) return; // Safety: stop if nav or button missing
+document.addEventListener('DOMContentLoaded', function() {
+  const hamburger = document.getElementById('hamburger');
+  const nav = document.getElementById('responsiveNav');
+  const navDrawer = document.querySelector('.nav-drawer');
 
-  const drawer = nav.querySelector('.nav-drawer');
-  if (!drawer) return; // Safety: stop if nav-drawer missing
-
-  // Collapse menu by default on page load
-  function collapseNav() {
-    nav.classList.remove("expanded");
-    nav.classList.add("collapsed");
-    document.body.style.overflow = "";
-  }
-  function expandNav() {
-    nav.classList.add("expanded");
-    nav.classList.remove("collapsed");
-    document.body.style.overflow = "hidden";
+  function closeDrawer() {
+    nav.classList.remove('expanded');
+    nav.classList.add('collapsed');
+    hamburger.setAttribute('aria-expanded', 'false');
   }
 
-  collapseNav();
+  function openDrawer() {
+    nav.classList.add('expanded');
+    nav.classList.remove('collapsed');
+    hamburger.setAttribute('aria-expanded', 'true');
+  }
 
-  hamburger.addEventListener("click", (e) => {
+  // Hamburger click toggles menu
+  hamburger.addEventListener('click', function(e) {
     e.stopPropagation();
-    if (nav.classList.contains("expanded")) {
-      collapseNav();
+    if (nav.classList.contains('expanded')) {
+      closeDrawer();
     } else {
-      expandNav();
+      openDrawer();
     }
   });
 
-  nav.addEventListener("click", function(e) {
-    if (e.target === nav && nav.classList.contains("expanded")) {
-      collapseNav();
+  // Clicking overlay closes menu
+  nav.addEventListener('click', function(e) {
+    if (e.target === nav && nav.classList.contains('expanded')) {
+      closeDrawer();
     }
   });
 
-  drawer.querySelectorAll(".dropdown > .tab").forEach(tab => {
-    tab.addEventListener("click", function(e) {
-      let dropdown = this.parentElement;
-      let hasDropdown = dropdown.querySelector(".dropdown-content");
-      if (window.innerWidth <= 980 && hasDropdown) {
-        e.preventDefault();
-        dropdown.classList.toggle("expanded");
-      }
-    });
-  });
-
-  drawer.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", function() {
-      if (window.innerWidth <= 980) {
-        collapseNav();
-      }
-    });
-  });
-
-  const links = nav.querySelectorAll(".dropdown-content a, .tab");
-  const currentPath = window.location.pathname.split("/").pop();
-  links.forEach(link => {
-    const href = link.getAttribute("href");
-    if (href === currentPath) {
-      link.classList.add("current");
+  // Clicking a nav link in the drawer closes the menu (mobile)
+  navDrawer.addEventListener('click', function(e) {
+    if (e.target.tagName === "A") {
+      closeDrawer();
     }
   });
 
-  nav.querySelectorAll(".dropdown").forEach(dropdown => {
-    dropdown.addEventListener("mouseenter", () => {
-      if (window.innerWidth > 980) dropdown.classList.add("expanded");
-    });
-    dropdown.addEventListener("mouseleave", () => {
-      if (window.innerWidth > 980) dropdown.classList.remove("expanded");
-    });
+  // ESC key closes menu
+  document.addEventListener('keydown', function(e) {
+    if (e.key === "Escape") closeDrawer();
   });
 
-  links.forEach(tab => {
-    tab.setAttribute("tabindex", "0");
-    tab.addEventListener("keydown", (e) => {
-      if ((e.key === "Enter" || e.key === " ") && tab.nextElementSibling && tab.nextElementSibling.classList.contains('dropdown-content')) {
-        e.preventDefault();
-        let dropdown = tab.parentElement;
-        dropdown.classList.toggle("expanded");
-      }
-    });
-  });
-
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 980) {
-      collapseNav();
+  // Clicking outside nav closes drawer (on mobile)
+  document.body.addEventListener('click', function(e) {
+    if (nav.classList.contains('expanded') && !nav.contains(e.target) && e.target !== hamburger) {
+      closeDrawer();
     }
-  });
+  }, true);
 });

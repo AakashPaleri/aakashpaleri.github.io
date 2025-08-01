@@ -29,7 +29,7 @@ body {
   }
 }
 
-/* --- HEADER + HOVER EFFECT --- */
+/* HEADER fixes */
 header {
   background-color: var(--header-bg);
   display: flex;
@@ -61,25 +61,29 @@ header h1 {
   display: block;
   padding: 0 48px;
   box-sizing: border-box;
+  /* Allow multi-line! */
+  white-space: normal !important;
+  text-overflow: unset !important;
 }
 header a.nav-title-link {
   color: white;
   text-decoration: none;
   display: inline-block;
-  /* Only scale up on hover! */
+  /* scale up only on hover! */
   transition: transform 0.25s cubic-bezier(.4,.14,.3,1.25);
 }
 header a.nav-title-link:hover {
   transform: scale(1.05);
 }
 
-/* --- Hamburger menu: only on mobile --- */
+/* --- Hamburger menu only on mobile and never overlaps title --- */
 .nav-toggle {
   display: none; /* Hide on desktop */
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  position: relative;
+  margin: 0 auto;
+  left: unset;
+  top: unset;
+  transform: none;
   border: none;
   background: var(--nav-bg);
   color: white;
@@ -92,26 +96,40 @@ header a.nav-title-link:hover {
   min-width: 65px;
   z-index: 2000;
   flex-shrink: 0;
-  pointer-events: none;
+  pointer-events: auto;
 }
+
+/* HEADER: mobile flex column, no overlap */
 @media (max-width: 980px) {
+  header {
+    flex-direction: column;
+    height: auto;
+    padding: 7px 0 0 0;
+    gap: 2px;
+  }
   .nav-toggle {
     display: block;
-    pointer-events: auto;
+    margin-bottom: 2px;
+    margin-top: 2px;
+    align-self: flex-start;
   }
   header h1 {
-    font-size: clamp(0.85rem, 4vw, 1.5rem);
-    padding: 0 40px;
+    font-size: clamp(0.95rem, 6vw, 1.28rem);
+    padding: 0 10vw 0 10vw;
     min-width: 0;
     flex-shrink: 1;
     max-width: 100vw;
     overflow: visible;
+    white-space: normal !important;
+    text-overflow: unset !important;
+    margin-top: 3px;
+    margin-bottom: 5px;
   }
 }
 @media (max-width: 580px) {
   header h1 {
-    font-size: clamp(0.7rem, 6vw, 1.1rem);
-    padding: 0 24px;
+    font-size: clamp(0.8rem, 7vw, 1rem);
+    padding: 0 7vw 0 7vw;
   }
   .nav-toggle {
     padding: 10px 10px 10px 8px;
@@ -120,7 +138,7 @@ header a.nav-title-link:hover {
   }
 }
 
-/* --- NAVBAR --- */
+/* NAVBAR (sitewide) */
 nav {
   background-color: var(--nav-bg);
   display: flex;
