@@ -145,7 +145,51 @@ nav {
   display: block;
 }
 
-/* ===== TABLET MIDWIDTH: Tabs auto-shrink, no wrap, always in one row ===== */
+/* === "More" Dropdown === */
+.more-tab {
+  display: none; /* shown by JS if needed */
+  position: relative;
+  margin: 0 0.5vw;
+  z-index: 100;
+  align-items: center;
+}
+.more-tab .tab {
+  background: var(--tab-bg);
+  color: var(--tab-text);
+  cursor: pointer;
+  border-radius: 18px 18px 0 0;
+  margin: 0;
+  min-width: 80px;
+}
+.more-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 180px;
+  background: #fff;
+  box-shadow: 0 8px 24px 0 rgba(0,0,0,0.14);
+  border-radius: 0 0 10px 10px;
+  padding: 0.3em 0;
+  z-index: 99999;
+}
+.more-tab.open .more-dropdown {
+  display: block;
+}
+.more-dropdown a {
+  display: block;
+  padding: 10px 22px;
+  color: #1b365f;
+  background: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+.more-dropdown a:hover {
+  background: #e0f0e9;
+}
+
+/* ===== TABLET MIDWIDTH: Tabs in one row, extras in "More" ===== */
 @media (max-width: 1110px) and (min-width: 729px) {
   nav, .nav-drawer {
     display: flex;
@@ -154,6 +198,7 @@ nav {
     align-items: stretch;
     width: 100vw;
     padding: 0.2rem 0 0 0;
+    overflow-x: hidden !important;
   }
   .tab, .dropdown {
     flex: 1 1 0;
@@ -173,6 +218,7 @@ nav {
   .dropdown {
     margin: 0 0.2vw;
   }
+  .more-tab { display: flex !important; }
 }
 
 /* ===== MOBILE NAVIGATION ===== */
@@ -225,7 +271,7 @@ nav {
     background: var(--tab-hover);
     color: var(--nav-bg);
   }
-  .dropdown-content {
+  .dropdown-content, .more-dropdown {
     position: static !important;
     z-index: 100000;
     box-shadow: none;
@@ -236,10 +282,11 @@ nav {
     left: 0;
     display: none;
   }
-  .dropdown.expanded > .dropdown-content {
+  .dropdown.expanded > .dropdown-content,
+  .more-tab.open .more-dropdown {
     display: block !important;
   }
-  .dropdown-content a {
+  .dropdown-content a, .more-dropdown a {
     background: #fff;
     color: var(--tab-text);
     text-align: center;
@@ -251,9 +298,10 @@ nav {
     display: block;
     box-sizing: border-box;
   }
-  .dropdown-content a:hover {
+  .dropdown-content a:hover, .more-dropdown a:hover {
     background: #e0f0e9;
   }
+  .more-tab { display: none !important; }
 }
 @keyframes accordion-down {
   from { opacity: 0; transform: scaleY(0.8);}
