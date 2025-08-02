@@ -21,6 +21,11 @@ body {
   border-radius: 2rem;
   padding: 2.5rem 2.5rem 3.5rem 2.5rem;
 }
+pre {
+  white-space: pre-wrap; /* Allows text to wrap */
+  word-wrap: break-word; /* Prevents long words from overflowing */
+  max-width: 100%; /* Ensures it doesn't exceed parent width */
+}
 
 header {
   background-color: var(--header-bg);
