@@ -1,4 +1,4 @@
-function(){
+(function(){
   function closeAllDropdowns() {
     document.querySelectorAll('.dropdown.expanded').forEach(dd => dd.classList.remove('expanded'));
   }
@@ -32,4 +32,4 @@ function(){
   });
 
   window.addEventListener('resize', closeAllDropdowns);
-}();
+})();
