@@ -6,23 +6,25 @@ console.log('nav.js loaded and running');
   }
 
   document.querySelectorAll('.dropdown .tab').forEach(tab => {
-    tab.onclick = null;
-    const dropdown = tab.closest('.dropdown');
-    const hasDropdown = dropdown && dropdown.querySelector('.dropdown-content');
+  tab.onclick = null;
+  const dropdown = tab.closest('.dropdown');
+  const hasDropdown = dropdown && dropdown.querySelector('.dropdown-content');
 
-    if (hasDropdown) {
-      tab.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation(); // this prevents the document click from firing
-        if (dropdown.classList.contains('expanded')) {
-          dropdown.classList.remove('expanded');
-        } else {
-          closeAllDropdowns();
-          dropdown.classList.add('expanded');
-        }
-      });
-    }
-  });
+  if (hasDropdown) {
+    console.log('Attaching click handler to', tab.textContent);
+    tab.addEventListener('click', function(e) {
+      console.log('Dropdown tab clicked:', tab.textContent);
+      e.preventDefault();
+      e.stopPropagation();
+      if (dropdown.classList.contains('expanded')) {
+        dropdown.classList.remove('expanded');
+      } else {
+        closeAllDropdowns();
+        dropdown.classList.add('expanded');
+      }
+    });
+  }
+});
 
   // Close dropdowns on outside click
   document.addEventListener('click', function(e) {
