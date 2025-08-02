@@ -160,17 +160,30 @@ nav {
 
 /* ===== TABLET MIDWIDTH: Tabs auto-shrink, no wrap, always in one row ===== */
 @media (max-width: 1110px) and (min-width: 729px) {
-  nav, .nav-drawer {
+  nav {
     display: flex;
     flex-wrap: nowrap !important;
     justify-content: flex-start;
     align-items: stretch;
     width: 100vw;
     padding: 0;
-    overflow: visible !important;     /* <---- CHANGED: Allow dropdown overlay */
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox hide */
+    overflow: visible !important;         /* <<<<<< KEY: nav overflow visible */
+    position: relative;                   /* <<<<<< KEY: nav as positioning context */
+    z-index: 1001;                        /* <<<<<< KEY: nav higher z-index */
     border-bottom: 2px solid #1b365f;
+  }
+  .nav-drawer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 100%;
+    overflow-x: auto !important;          /* <<<< Only drawer scrolls! */
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    position: relative;                   /* For stacking context */
+    z-index: 1002;                        /* Higher than nav just in case */
   }
   nav::-webkit-scrollbar, .nav-drawer::-webkit-scrollbar { display: none; }
   .tab, .dropdown {
@@ -181,7 +194,7 @@ nav {
   .tab {
     font-size: 0.93rem;
     padding: 8px 8px;
-    margin: 0 0.2vw 0 0.2vw;  /* No vertical margin */
+    margin: 0 0.2vw 0 0.2vw;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -191,24 +204,25 @@ nav {
   }
   .dropdown {
     margin: 0 0.2vw;
+    position: relative;                   /* <<< Dropdown context for absolute overlay */
+    z-index: 1003;                        /* Higher for overlay stacking */
   }
   .dropdown-content {
-    position: absolute !important;  /* Always overlay */
-    left: 0;
+    display: none;
+    position: absolute !important;
     top: 100%;
+    left: 0;
     min-width: 200px;
     width: max-content;
-    z-index: 99999 !important;
+    z-index: 20000 !important;            /* <<<<< Make overlays VERY topmost */
     background: #fff;
     box-shadow: 0 8px 24px 0 rgba(0,0,0,0.14);
     border-radius: 0 0 10px 10px;
     margin-top: 0.2rem;
-    display: none;
   }
   .dropdown.expanded > .dropdown-content {
     display: block !important;
   }
-  /* Hide hover/focus dropdown to avoid flicker on touch */
   .dropdown:hover .dropdown-content,
   .dropdown:focus-within .dropdown-content {
     display: none !important;
