@@ -1,49 +1,53 @@
-function closeAllDropdowns() {
-  document.querySelectorAll('.dropdown.expanded').forEach(dd => dd.classList.remove('expanded'));
-}
-
 function setupDropdowns() {
   document.querySelectorAll('.dropdown .tab.dropdown-toggle').forEach(tab => {
     const dropdown = tab.closest('.dropdown');
     if (!dropdown) return;
+    const content = dropdown.querySelector('.dropdown-content');
 
     // Open on click
     tab.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
-      if (dropdown.classList.contains('expanded')) {
-        dropdown.classList.remove('expanded');
-      } else {
-        closeAllDropdowns();
+
+      const alreadyOpen = dropdown.classList.contains('expanded');
+      closeAllDropdowns();
+
+      if (!alreadyOpen) {
         dropdown.classList.add('expanded');
+        // Position the dropdown if in tablet view
+        if (window.innerWidth >= 729 && window.innerWidth <= 1110 && content) {
+          // Get tab position relative to viewport
+          const tabRect = tab.getBoundingClientRect();
+          content.style.left = tabRect.left + "px";
+          content.style.top = (tabRect.bottom + 2) + "px"; // +2px for nav border
+          content.style.minWidth = tabRect.width + "px";
+        } else if (content) {
+          // Remove inline positioning for non-tablet views
+          content.style.left = "";
+          content.style.top = "";
+          content.style.minWidth = "";
+        }
       }
     });
 
-    // Open on focus (keyboard Tab navigation)
-    tab.addEventListener('focus', function(e) {
-      closeAllDropdowns();
-      dropdown.classList.add('expanded');
+    // Close dropdown on mouseleave for tablet/desktop
+    dropdown.addEventListener('mouseleave', function() {
+      if (window.innerWidth >= 729) {
+        dropdown.classList.remove('expanded');
+      }
     });
 
-    // Close when tabbing out (keyboard navigation)
-    tab.addEventListener('blur', function(e) {
-      setTimeout(() => { // Timeout lets next focus event run first
-        if (!dropdown.contains(document.activeElement)) {
-          dropdown.classList.remove('expanded');
-        }
-      }, 50);
-    });
-
-    // Hover open/close for desktop and tablet
+    // Optionally: Hover to open on desktop/tablet
     dropdown.addEventListener('mouseenter', function() {
       if (window.innerWidth >= 729) {
         closeAllDropdowns();
         dropdown.classList.add('expanded');
-      }
-    });
-    dropdown.addEventListener('mouseleave', function() {
-      if (window.innerWidth >= 729) {
-        dropdown.classList.remove('expanded');
+        if (window.innerWidth <= 1110 && content) {
+          const tabRect = tab.getBoundingClientRect();
+          content.style.left = tabRect.left + "px";
+          content.style.top = (tabRect.bottom + 2) + "px";
+          content.style.minWidth = tabRect.width + "px";
+        }
       }
     });
   });
@@ -55,16 +59,13 @@ function setupDropdowns() {
     });
   });
 
-  // On resize, close all
-  window.addEventListener('resize', closeAllDropdowns);
-}
-
-// Loader logic (keep after nav.html is injected!)
-if (typeof setupDropdowns === "undefined" || !window.setupDropdownsAttached) {
-  window.setupDropdownsAttached = true;
-  if (document.readyState === "complete" || document.readyState === "interactive") {
-    setupDropdowns();
-  } else {
-    document.addEventListener("DOMContentLoaded", setupDropdowns);
-  }
+  // On resize, close all and remove inline styles
+  window.addEventListener('resize', function() {
+    document.querySelectorAll('.dropdown.expanded').forEach(dd => dd.classList.remove('expanded'));
+    document.querySelectorAll('.dropdown-content').forEach(content => {
+      content.style.left = "";
+      content.style.top = "";
+      content.style.minWidth = "";
+    });
+  });
 }

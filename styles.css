@@ -209,22 +209,24 @@ nav {
   }
   .dropdown-content {
     display: none;
-    position: absolute !important;
-    top: 100%;
-    left: 0;
-    min-width: 200px;
+    position: fixed !important;      /* <<< THIS is the fix: make it fixed */
+    top: calc(117px + 2px);           /* Adjust 72px to match your nav+header height */
+    /* 2px is the border-bottom of nav */
+    left: auto;
+    min-width: 220px;
     width: max-content;
-    z-index: 10000 !important;            /* <<<<< Make overlays VERY topmost */
+    z-index: 99999 !important;
     background: #fff;
     box-shadow: 0 8px 24px 0 rgba(0,0,0,0.14);
     border-radius: 0 0 10px 10px;
-    margin-top: 0.2rem;
+    margin-top: 0;
+    /* Optionally, add a transition or animation here */
   }
-  .dropdown.expanded > .dropdown-content,
-  .dropdown:focus-within .dropdown-content {
+  .dropdown.expanded > .dropdown-content {
     display: block !important;
   }
-   .dropdown:hover .dropdown-content {
+  .dropdown:hover .dropdown-content,
+  .dropdown:focus-within .dropdown-content {
     display: none !important;
   }
 }
