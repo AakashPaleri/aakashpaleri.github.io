@@ -1,19 +1,23 @@
-// Dropdown close utility
+// Utility: Close all dropdowns
 function closeAllDropdowns() {
   document.querySelectorAll('.dropdown.expanded').forEach(dd => dd.classList.remove('expanded'));
 }
 
-// Attach handlers to dropdown parent tabs
-document.querySelectorAll('.dropdown .tab.dropdown-toggle').forEach(tab => {
-  tab.onclick = null;
+// Set up listeners for dropdown parent tabs
+function setupDropdowns() {
+  document.querySelectorAll('.dropdown .tab.dropdown-toggle').forEach(tab => {
+    tab.onclick = null; // Reset first
 
-  const dropdown = tab.closest('.dropdown');
-  if (!dropdown) return;
+    const dropdown = tab.closest('.dropdown');
+    if (!dropdown) return;
 
-  function handleClick(e) {
-    // Always toggle on click for mobile/tablet/desktop
-    if (window.innerWidth <= 728) {
-      // Mobile logic: toggle dropdown on click
+    // Remove old listeners if any (by cloning node)
+    const tabClone = tab.cloneNode(true);
+    tab.parentNode.replaceChild(tabClone, tab);
+    tab = tabClone;
+
+    // CLICK always toggles dropdown at all widths
+    tab.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
       if (dropdown.classList.contains('expanded')) {
@@ -22,39 +26,31 @@ document.querySelectorAll('.dropdown .tab.dropdown-toggle').forEach(tab => {
         closeAllDropdowns();
         dropdown.classList.add('expanded');
       }
-    } else {
-      // Tablet/Desktop logic: allow both click and hover
-      e.preventDefault();
-      e.stopPropagation();
+    });
+
+    // For desktop AND tablet (729px+): also allow hover to open
+    function addHoverListeners() {
+      if (window.innerWidth >= 729) {
+        dropdown.addEventListener('mouseenter', mouseEnterHandler);
+        dropdown.addEventListener('mouseleave', mouseLeaveHandler);
+      } else {
+        dropdown.removeEventListener('mouseenter', mouseEnterHandler);
+        dropdown.removeEventListener('mouseleave', mouseLeaveHandler);
+      }
+    }
+    function mouseEnterHandler() {
       closeAllDropdowns();
       dropdown.classList.add('expanded');
     }
-  }
-
-  tab.addEventListener('click', handleClick);
-
-  // For tablet and desktop: hover also works
-  function setupHoverListeners() {
-    if (window.innerWidth > 728) {
-      dropdown.addEventListener('mouseleave', function() {
-        dropdown.classList.remove('expanded');
-      });
-      tab.addEventListener('mouseenter', function() {
-        closeAllDropdowns();
-        dropdown.classList.add('expanded');
-      });
+    function mouseLeaveHandler() {
+      dropdown.classList.remove('expanded');
     }
-  }
+    addHoverListeners();
 
-  setupHoverListeners();
-  window.addEventListener('resize', () => {
-    // On resize, re-setup hover listeners to adapt to new width
-    dropdown.removeEventListener('mouseleave', function() {});
-    tab.removeEventListener('mouseenter', function() {});
-    setupHoverListeners();
-    closeAllDropdowns();
+    // Update hover logic on resize
+    window.addEventListener('resize', addHoverListeners);
   });
-});
+}
 
 // Clicking outside closes all dropdowns
 document.addEventListener('click', function(e) {
@@ -65,3 +61,10 @@ document.addEventListener('click', function(e) {
 
 // On resize, close all
 window.addEventListener('resize', closeAllDropdowns);
+
+// Setup after DOM loaded
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", setupDropdowns);
+} else {
+  setupDropdowns();
+}
