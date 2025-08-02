@@ -13,14 +13,11 @@
  
 <script>
   fetch('nav.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('nav-placeholder').innerHTML = html;
-      // Now load nav.js only after nav is injected!
-      var script = document.createElement('script');
-      script.src = 'nav.js';
-      document.body.appendChild(script);
-    });
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('nav-placeholder').innerHTML = html;
+    import('./nav.js');
+  });
 </script>
   <main class="site-content">
     <h2 style="text-align: justify;">Welcome to the landing page of the Ethics by Design Tool Box for Synthetic Biology</h2>
