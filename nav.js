@@ -1,9 +1,12 @@
-document.addEventListener('DOMContentLoaded', function() {
+function setupNavDropdowns() {
+  // Don't run twice!
+  if (window.__nav_dropdowns_attached__) return;
+  window.__nav_dropdowns_attached__ = true;
+
   function closeAllDropdowns() {
     document.querySelectorAll('.dropdown.expanded').forEach(dd => dd.classList.remove('expanded'));
   }
 
-  // For every dropdown parent, toggle dropdown on click/tap
   document.querySelectorAll('.dropdown .tab').forEach(tab => {
     tab.onclick = null; // Remove previous
     tab.addEventListener('click', function(e) {
@@ -30,4 +33,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // On resize, close all open menus
   window.addEventListener('resize', closeAllDropdowns);
-});
+}
+
+// --- MutationObserver to detect when nav is injected ---
+const navPlaceholder = document.getElementById('nav-placeholder');
+if (navPlaceholder) {
+  const observer = new MutationObserver((mutations, obs) => {
+    if (navPlaceholder.querySelector('.dropdown .tab')) {
+      setupNavDropdowns();
+      obs.disconnect(); // Only run once, or remove this line if you want to re-run on every change
+    }
+  });
+  observer.observe(navPlaceholder, { childList: true, subtree: true });
+}
