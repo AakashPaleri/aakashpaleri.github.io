@@ -195,7 +195,12 @@ nav {
   }
   .dropdown.expanded > .dropdown-content {
     display: block !important;
+    
   }
+.dropdown-content a:hover { background-color: var(--tab-hover); }
+.dropdown:hover .dropdown-content,
+.dropdown:focus-within .dropdown-content {
+  display: none !important;
 }
 
 
