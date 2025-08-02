@@ -1,6 +1,4 @@
-console.log('nav.js loaded and running');
-
-(function(){
+function(){
   function closeAllDropdowns() {
     document.querySelectorAll('.dropdown.expanded').forEach(dd => dd.classList.remove('expanded'));
   }
@@ -34,4 +32,4 @@ console.log('nav.js loaded and running');
   });
 
   window.addEventListener('resize', closeAllDropdowns);
-})();
+}();
