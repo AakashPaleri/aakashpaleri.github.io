@@ -1,67 +1,57 @@
-// Dropdown close utility
-function closeAllDropdowns() {
-  document.querySelectorAll('.dropdown.expanded').forEach(dd => dd.classList.remove('expanded'));
-}
+function setupDropdowns() {
+  // Remove any previously attached listeners to avoid duplicates
+  document.querySelectorAll('.dropdown').forEach(dropdown => {
+    dropdown.replaceWith(dropdown.cloneNode(true));
+  });
 
-// Attach handlers to dropdown parent tabs
-document.querySelectorAll('.dropdown .tab.dropdown-toggle').forEach(tab => {
-  tab.onclick = null;
+  document.querySelectorAll('.dropdown .tab.dropdown-toggle').forEach(tab => {
+    const dropdown = tab.closest('.dropdown');
+    if (!dropdown) return;
 
-  const dropdown = tab.closest('.dropdown');
-  if (!dropdown) return;
-
-  function handleClick(e) {
-    // Always toggle on click for mobile/tablet/desktop
-    if (window.innerWidth <= 728) {
-      // Mobile logic: toggle dropdown on click
+    tab.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
       if (dropdown.classList.contains('expanded')) {
         dropdown.classList.remove('expanded');
       } else {
-        closeAllDropdowns();
+        document.querySelectorAll('.dropdown.expanded').forEach(dd => dd.classList.remove('expanded'));
         dropdown.classList.add('expanded');
       }
-    } else {
-      // Tablet/Desktop logic: allow both click and hover
-      e.preventDefault();
-      e.stopPropagation();
-      closeAllDropdowns();
-      dropdown.classList.add('expanded');
-    }
-  }
+    });
 
-  tab.addEventListener('click', handleClick);
-
-  // For tablet and desktop: hover also works
-  function setupHoverListeners() {
-    if (window.innerWidth > 728) {
-      dropdown.addEventListener('mouseleave', function() {
-        dropdown.classList.remove('expanded');
-      });
-      tab.addEventListener('mouseenter', function() {
-        closeAllDropdowns();
+    // Hover for tablet/desktop (>728px)
+    function mouseEnterHandler() {
+      if (window.innerWidth >= 729) {
+        document.querySelectorAll('.dropdown.expanded').forEach(dd => dd.classList.remove('expanded'));
         dropdown.classList.add('expanded');
-      });
+      }
     }
-  }
+    function mouseLeaveHandler() {
+      if (window.innerWidth >= 729) {
+        dropdown.classList.remove('expanded');
+      }
+    }
 
-  setupHoverListeners();
-  window.addEventListener('resize', () => {
-    // On resize, re-setup hover listeners to adapt to new width
-    dropdown.removeEventListener('mouseleave', function() {});
-    tab.removeEventListener('mouseenter', function() {});
-    setupHoverListeners();
-    closeAllDropdowns();
+    dropdown.addEventListener('mouseenter', mouseEnterHandler);
+    dropdown.addEventListener('mouseleave', mouseLeaveHandler);
   });
-});
 
-// Clicking outside closes all dropdowns
-document.addEventListener('click', function(e) {
-  document.querySelectorAll('.dropdown.expanded').forEach(dd => {
-    if (!dd.contains(e.target)) dd.classList.remove('expanded');
+  // Close all when clicking outside
+  document.addEventListener('click', function(e) {
+    document.querySelectorAll('.dropdown.expanded').forEach(dd => {
+      if (!dd.contains(e.target)) dd.classList.remove('expanded');
+    });
   });
-});
 
-// On resize, close all
-window.addEventListener('resize', closeAllDropdowns);
+  // On resize, close all
+  window.addEventListener('resize', function() {
+    document.querySelectorAll('.dropdown.expanded').forEach(dd => dd.classList.remove('expanded'));
+  });
+}
+
+// Run setup only after DOM/nav loaded
+if (document.readyState === "complete" || document.readyState === "interactive") {
+  setupDropdowns();
+} else {
+  document.addEventListener("DOMContentLoaded", setupDropdowns);
+}
