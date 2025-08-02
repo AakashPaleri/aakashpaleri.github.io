@@ -193,7 +193,11 @@ nav {
   .dropdown {
     margin: 0 0.2vw;
   }
+  .dropdown.expanded > .dropdown-content {
+    display: block !important;
+  }
 }
+
 
 /* ===== MOBILE NAVIGATION ===== */
 @media (max-width: 728px) {
