@@ -1,17 +1,15 @@
-(function(){
-  function closeAllDropdowns() {
-    document.querySelectorAll('.dropdown.expanded').forEach(dd => dd.classList.remove('expanded'));
-  }
+// all your nav.js code here
+function closeAllDropdowns() {
+  document.querySelectorAll('.dropdown.expanded').forEach(dd => dd.classList.remove('expanded'));
+}
 
-  document.querySelectorAll('.dropdown .tab').forEach(tab => {
+document.querySelectorAll('.dropdown .tab').forEach(tab => {
   tab.onclick = null;
   const dropdown = tab.closest('.dropdown');
   const hasDropdown = dropdown && dropdown.querySelector('.dropdown-content');
 
   if (hasDropdown) {
-    console.log('Attaching click handler to', tab.textContent);
     tab.addEventListener('click', function(e) {
-      console.log('Dropdown tab clicked:', tab.textContent);
       e.preventDefault();
       e.stopPropagation();
       if (dropdown.classList.contains('expanded')) {
@@ -24,12 +22,12 @@
   }
 });
 
-  // Close dropdowns on outside click
-  document.addEventListener('click', function(e) {
-    document.querySelectorAll('.dropdown.expanded').forEach(dd => {
-      if (!dd.contains(e.target)) dd.classList.remove('expanded');
-    });
+document.addEventListener('click', function(e) {
+  document.querySelectorAll('.dropdown.expanded').forEach(dd => {
+    if (!dd.contains(e.target)) dd.classList.remove('expanded');
   });
+});
 
-  window.addEventListener('resize', closeAllDropdowns);
-})();
+window.addEventListener('resize', closeAllDropdowns);
+
+console.log('Dropdown handlers attached!');
