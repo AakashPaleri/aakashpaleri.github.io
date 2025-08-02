@@ -1,53 +1,55 @@
 document.addEventListener('DOMContentLoaded', function() {
-  const cta = document.getElementById('navMobileCTA');
+  // Get the hamburger button, nav container, and nav drawer
+  const hamburger = document.getElementById('hamburger');
   const nav = document.getElementById('responsiveNav');
+  const navDrawer = document.querySelector('.nav-drawer');
+  if (!hamburger || !nav || !navDrawer) return;
 
-  if (!cta || !nav) return;
-
-  // Always start collapsed on mobile
-  nav.classList.remove('expanded');
-  nav.classList.add('collapsed');
-  cta.setAttribute('aria-expanded', 'false');
-
-  function toggleAccordion() {
-    nav.classList.toggle('expanded');
-    nav.classList.toggle('collapsed');
-    cta.setAttribute('aria-expanded', nav.classList.contains('expanded') ? 'true' : 'false');
+  function closeDrawer() {
+    nav.classList.remove('expanded');
+    nav.classList.add('collapsed');
+    hamburger.setAttribute('aria-expanded', 'false');
   }
 
-  cta.addEventListener('click', function(e) {
+  function openDrawer() {
+    nav.classList.add('expanded');
+    nav.classList.remove('collapsed');
+    hamburger.setAttribute('aria-expanded', 'true');
+  }
+
+  // Hamburger click toggles menu
+  hamburger.addEventListener('click', function(e) {
     e.stopPropagation();
-    toggleAccordion();
-  });
-  cta.addEventListener('keydown', function(e) {
-    if (e.key === " " || e.key === "Enter") {
-      e.preventDefault();
-      toggleAccordion();
+    if (nav.classList.contains('expanded')) {
+      closeDrawer();
+    } else {
+      openDrawer();
     }
   });
 
-  // Optional: close nav if click outside (mobile)
-  document.addEventListener('click', function(e) {
-    if (
-      window.innerWidth <= 1110 &&
-      nav.classList.contains('expanded') &&
-      !nav.contains(e.target) &&
-      e.target !== cta
-    ) {
-      nav.classList.remove('expanded');
-      nav.classList.add('collapsed');
-      cta.setAttribute('aria-expanded', 'false');
+  // Clicking overlay closes menu
+  nav.addEventListener('click', function(e) {
+    if (e.target === nav && nav.classList.contains('expanded')) {
+      closeDrawer();
     }
   });
-  // ESC closes accordion
+
+  // Clicking a nav link in the drawer closes the menu (mobile)
+  navDrawer.addEventListener('click', function(e) {
+    if (e.target.tagName === "A") {
+      closeDrawer();
+    }
+  });
+
+  // ESC key closes menu
   document.addEventListener('keydown', function(e) {
-    if (
-      (e.key === "Escape" || e.key === "Esc") &&
-      nav.classList.contains('expanded')
-    ) {
-      nav.classList.remove('expanded');
-      nav.classList.add('collapsed');
-      cta.setAttribute('aria-expanded', 'false');
-    }
+    if (e.key === "Escape") closeDrawer();
   });
+
+  // Clicking outside nav closes drawer (on mobile)
+  document.body.addEventListener('click', function(e) {
+    if (nav.classList.contains('expanded') && !nav.contains(e.target) && e.target !== hamburger) {
+      closeDrawer();
+    }
+  }, true);
 });
