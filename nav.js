@@ -52,4 +52,45 @@ document.addEventListener('DOMContentLoaded', function() {
       closeDrawer();
     }
   }, true);
+  
+  // --- Dropdown click support for tablet/desktop (for touch screens) ---
+  function enableDropdownClickForTablet() {
+    // Only apply this on screens >= 729px (not on mobile)
+    if (window.innerWidth >= 729) {
+      document.querySelectorAll('.dropdown').forEach(dropdown => {
+        const tab = dropdown.querySelector('.tab');
+        if (!tab) return;
+
+        // Remove any old listeners to prevent stacking
+        tab.onclick = null;
+
+        tab.addEventListener('click', function(e) {
+          // If the dropdown is already open via 'expanded', close it
+          if (dropdown.classList.contains('expanded')) {
+            dropdown.classList.remove('expanded');
+          } else {
+            // Close other dropdowns first
+            document.querySelectorAll('.dropdown.expanded').forEach(d => d.classList.remove('expanded'));
+            dropdown.classList.add('expanded');
+          }
+          // Prevent navigation if this tab is a parent for a dropdown
+          e.preventDefault();
+        });
+      });
+
+      // Clicking anywhere else closes dropdowns
+      document.body.addEventListener('click', function(e) {
+        document.querySelectorAll('.dropdown.expanded').forEach(d => {
+          if (!d.contains(e.target)) d.classList.remove('expanded');
+        });
+      });
+    }
+  }
+
+  enableDropdownClickForTablet();
+
+  // On resize, re-enable logic as needed
+  window.addEventListener('resize', function() {
+    enableDropdownClickForTablet();
+  });
 });
