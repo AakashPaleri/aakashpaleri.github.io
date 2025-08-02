@@ -54,5 +54,3 @@ document.addEventListener('click', function(e) {
 
 // On resize, close all
 window.addEventListener('resize', closeAllDropdowns);
-
-console.log('Dropdown handlers attached!');
