@@ -214,17 +214,17 @@ nav {
     left: 0;
     min-width: 200px;
     width: max-content;
-    z-index: 20000 !important;            /* <<<<< Make overlays VERY topmost */
+    z-index: 10000 !important;            /* <<<<< Make overlays VERY topmost */
     background: #fff;
     box-shadow: 0 8px 24px 0 rgba(0,0,0,0.14);
     border-radius: 0 0 10px 10px;
     margin-top: 0.2rem;
   }
-  .dropdown.expanded > .dropdown-content {
+  .dropdown.expanded > .dropdown-content,
+  .dropdown:focus-within .dropdown-content {
     display: block !important;
   }
-  .dropdown:hover .dropdown-content,
-  .dropdown:focus-within .dropdown-content {
+   .dropdown:hover .dropdown-content {
     display: none !important;
   }
 }
