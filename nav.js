@@ -24,8 +24,6 @@ document.querySelectorAll('.dropdown .tab.dropdown-toggle').forEach(tab => {
       }
     } else {
       // Tablet/Desktop logic: allow both click and hover
-      e.preventDefault();
-      e.stopPropagation();
       closeAllDropdowns();
       dropdown.classList.add('expanded');
     }
@@ -47,21 +45,18 @@ document.querySelectorAll('.dropdown .tab.dropdown-toggle').forEach(tab => {
   }
 
   setupHoverListeners();
-  window.addEventListener('resize', () => {
+ // window.addEventListener('resize', () => {
     // On resize, re-setup hover listeners to adapt to new width
-    dropdown.removeEventListener('mouseleave', function() {});
-    tab.removeEventListener('mouseenter', function() {});
-    setupHoverListeners();
-    closeAllDropdowns();
-  });
-});
+   // dropdown.removeEventListener('mouseleave', function() {});
+    //tab.removeEventListener('mouseenter', function() {});
+    //setupHoverListeners();
+    //closeAllDropdowns();
+  //});
+//});
 
 // Clicking outside closes all dropdowns
 document.addEventListener('click', function(e) {
   document.querySelectorAll('.dropdown.expanded').forEach(dd => {
     if (!dd.contains(e.target)) dd.classList.remove('expanded');
   });
-});
-
-// On resize, close all
-window.addEventListener('resize', closeAllDropdowns);
+})})
